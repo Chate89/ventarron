@@ -454,10 +454,12 @@ function keyPressed() {
       if (shapes[selection-1].eq == false) {
         track[selection-1].disconnect();
         track[selection-1].connect(filter[selection-1]);
+        amp[selection-1].setInput(filter[selection-1])
         shapes[selection-1].eq = true;
       } else if (shapes[selection-1].eq == true) {
         track[selection-1].disconnect();
         track[selection-1].connect();
+        amp[selection-1].setInput(track[selection-1])
         shapes[selection-1].eq = false;
       }
     }
