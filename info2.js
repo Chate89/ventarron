@@ -106,18 +106,37 @@ function information() {
   noStroke();
   text("Up", windowWidth/2+250+xpos, bottom-75);
   noFill();
-  stroke(200, 100, 0, stroSatI);
 
   // numbers
   for (var i = 0; i < shapes.length; i++) {
-    if (selection-1 == i) {
-      fill(70, 30, 0, 255);
+    if (shapes[i].muted) {
+      if (selection-1 == i) {
+        fill(80, 80, 80);
+        stroke(120, 120, 120);
+      } else {
+        fill(30, 30, 30);
+        stroke(80, 80, 80);
+      }
     } else {
-      fill(0);
+      stroke(200, 100, 0, stroSatI);
+      if (selection-1 == i) {
+        fill(70, 30, 0, 255);
+      } else {
+        fill(0);
+      }
     }
     rect(windowWidth/2-350+(i*50)+xpos, bottom-235, 40, 40, 5);
-    fill(200, 100, 0, 200);
     noStroke();
+    if (shapes[i].muted) {
+      if (selection-1 == i) {
+        fill(150, 150, 150);
+      } else {
+        fill(80, 80, 80);
+      }
+    } else {
+      fill(200, 100, 0, 200);
+    }
+
     if (i < shapes.length-1) {
       text((i+1), windowWidth/2-360+(i*50)+xpos, bottom-220);
     } else {
@@ -126,6 +145,9 @@ function information() {
     noFill();
     stroke(200, 100, 0, stroSatI);
   }
+
+
+
   // ctrl and shift (size)
   if (keyIsDown(SHIFT)) {
     fill(70, 30, 0, 255);
@@ -170,8 +192,18 @@ function information() {
   fill(200, 100, 0, 200);
   noStroke();
   text("S", windowWidth/2-290+xpos, bottom-125);
-  fill(0);
-  stroke(200, 100, 0, stroSatI);
+  noStroke();
+  for (var i = 0; i < shapes.length; i++) {
+    if (shapes[i].solo) {
+      fill(200, 100, 0, 200);
+      stroke(200, 100, 0, 200);
+    } else {
+      noFill();
+      noStroke()
+    }
+  text('s', windowWidth/2-360+(i*50)+xpos, bottom-240);
+  noStroke();
+  }
 
   // mute
   if (selection != 0) {
@@ -183,14 +215,28 @@ function information() {
       }
     }
   }
+  stroke(200, 100, 0, stroSatI);
   rect(windowWidth/2+xpos, bottom-90, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
   text("M", windowWidth/2-10+xpos, bottom-75);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+  noStroke();
+  for (var i = 0; i < shapes.length; i++) {
+    if (shapes[i].muted) {
+      if (selection-1 == i) {
+        fill(150, 150, 150);
+      } else {
+        fill(80, 80, 80);
+      }
+    } else {
+      noFill();
+    }
+  text('m', windowWidth/2-340+(i*50)+xpos, bottom-240);
+  }
 
   // eq
+  noFill();
   if (selection != 0) {
     for (var i = 0; i < shapes.length; i++) {
       if (shapes[selection-1].eq == true) {
@@ -200,11 +246,26 @@ function information() {
       }
     }
   }
+  stroke(200, 100, 0, stroSatI);
   rect(windowWidth/2-240+xpos, bottom-190, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
   text("E", windowWidth/2-250+xpos, bottom-175);
   noFill();
+  for (var i = 0; i < shapes.length; i++) {
+    if (shapes[i].eq) {
+      if (shapes[i].muted) {
+        if (selection-1 == i) {
+          fill(150, 150, 150);
+        } else {
+          fill(80, 80, 80);
+        }
+      } else {
+        fill(200, 100, 0, 200);
+      }
+      text('Eq', windowWidth/2-340+(i*50)+xpos, bottom-220);
+    }
+  }
   stroke(200, 100, 0, stroSatI);
 
   // mute & solo (letters)
