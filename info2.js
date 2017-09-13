@@ -39,21 +39,21 @@ var infoData = [
     "windowed": "ventana",
     "fullscreen": "pantalla completa",
     "loading": "Cargando Pistas",
-    "spacebar": "La barra espaciadora iniciará la reproduccion en caso de que la musica este pausada, y pausara la produccion en caso de que se este reproduciendo.",
+    "spacebar": "La barra espaciadora iniciará la reproducción en caso de que la música este pausada, y pausara la producción en caso de que se esté reproduciendo.",
     "spacebarBar": "barra espaciadora",
-    "spacebarBarPress": "Presioná la Barra Espaciadora",
-    "shiftCtrl": "La tecla Shift incrementara el volumen del instrumento seleccionado, la tecla Ctrl disminuirá el volumen del instrumento seleccionado. El control de volumen tambien puede manejarse con la rueda del mouse (mouse wheel) o desde el panel tactil (touchpad).",
+    "spacebarBarPress": "Presiona la Barra Espaciadora",
+    "shiftCtrl": "La tecla Shift incrementará el volumen del instrumento seleccionado, la tecla Ctrl lo disminuirá. El control de volumen también puede manejarse con la rueda del mouse (mouse wheel) o desde el panel táctil (touchpad).",
     "arrowsL": "La tecla de navegación 'L' paneará el instrumento seleccionado hacia la izquierda: el volumen disminuirá en el parlante derecho (canal derecho o R) y se incrementará en el parlante izquierdo (canal izquierdo o L).",
-    "arrowsD": "La tecla de navegación 'Down' disminuirá la frecuencia del filtro (eq) del instrumento selccionado. Este valor afectará al sonido unicamente si el filtro (eq) esta 'activo' en el el instrumento seleccionado.",
-    "arrowsR": "La tecla de navegacion 'R' paneará el instrumento seleccionado hacia la derecha: el volumen disminuirá en el parlante izquierdo (canal izquierdo o L) y se incrementará en el parlante derecho (canal derecho o R).",
-    "arrowsU": "La tecla de navegación 'Up' incrementará la frecuencia del filtro (eq) del instrumento selccionado. Este valor afectará al sonido unicamente si el filtro (eq) esta 'activo' en el el instrumento seleccionado.",
-    "mute": "La tecla 'M' muteará o desmuteará el instrumento seleccionado. Los instrumentos muteados no tienen volumen pero siguen reproduciendoce.",
-    "solo": "La tecla 'S' solerá (dejara sonando de forma unica) o des-soleará el instrumento seleccionado. Cuando un instrumento esta 'soleado', los demas instrumentos siguen reproduciendose pero 'muteados'.",
-    "eq": "La tecla 'E' conectará o desconectará el instrumento seleccionado a un filtro 'paso banda' (BandPass). La frecuencia del filtro puede ser modificada con las teclas de navegacion ('up' y 'down') o con el mouse. Un filtro paso banda es un tipo de filtro electrónico que deja pasar un determinado rango de frecuencias de una señal y atenúa el paso del resto.",
-    "numbers": "Los numeros representan los instrumentos o capas que conforman la musica. Puedes seleccionar un instrumento con las teclas numéricas del teclado o con el mouse",
+    "arrowsD": "La tecla de navegación 'Down' disminuirá la frecuencia del filtro (eq) del instrumento seleccionado. Este valor afectará al sonido únicamente si el filtro (eq) esta 'activo' en el instrumento seleccionado.",
+    "arrowsR": "La tecla de navegación 'R' paneará el instrumento seleccionado hacia la derecha: el volumen disminuirá en el parlante izquierdo (canal izquierdo o L) y se incrementará en el parlante derecho (canal derecho o R).",
+    "arrowsU": "La tecla de navegación 'Up' incrementará la frecuencia del filtro (eq) del instrumento seleccionado. Este valor afectará al sonido únicamente si el filtro (eq) esta 'activo' en el instrumento seleccionado.",
+    "mute": "La tecla 'M' muteará o desmuteará el instrumento seleccionado. Los instrumentos muteados no tienen volumen, pero siguen reproduciéndose.",
+    "solo": "La tecla 'S' solerá (dejará sonando de forma única) o des-soleará el instrumento seleccionado. Cuando un instrumento esta 'soleado', los demás instrumentos siguen reproduciéndose, pero 'muteados'.",
+    "eq": "La tecla 'E' conectará o desconectará el instrumento seleccionado a un filtro 'paso banda' (BandPass). La frecuencia del filtro puede ser modificada con las teclas de navegación ('up' y 'down') o con el mouse. Un filtro paso banda es un tipo de filtro electrónico que deja pasar un determinado rango de frecuencias de una señal y atenúa el paso del resto.",
+    "numbers": "Los números representan los instrumentos o capas que conforman la música. Puedes seleccionar un instrumento con las teclas numéricas del teclado o con el mouse",
     "info": "La tecla 'I' abrirá o cerrará la ventana de información. Podes presionar la tecla 'i' en el teclado o el botón que se encuentra en la esquina superior izquierda con el mouse.",
     "fullscreenKey": "La tecla 'F' cambiara el modo de pantalla entre 'pantalla completa' o 'ventana'",
-    "lenguage": "Este Boton cambiará el idioma entre ESPAÑOL e INGLES. This button will toogle the lenguage between ENGLISH and SPANISH."
+    "lenguage": "Este botón cambiará el idioma entre ESPAÑOL e INGLES. This button will toogle the lenguage between ENGLISH and SPANISH."
   }
 ]
 
