@@ -190,6 +190,7 @@ function information() {
     stroke(200, 100, 0, stroSatI);
   }
 
+  // number volume
   for (var i = 0; i < shapes.length; i++) {
     stroke(200, 100, 0, stroSatI);
     fill(0);
@@ -259,6 +260,7 @@ function information() {
   }
 
   // mute
+  fill(0);
   if (selection != 0) {
     for (var i = 0; i < shapes.length; i++) {
       if (shapes[selection-1].muted == true) {
@@ -297,7 +299,7 @@ function information() {
   text("I", windowWidth/2+30+xpos, bottom-180);
 
   // eq
-  noFill();
+  fill(0);
   if (selection != 0) {
     for (var i = 0; i < shapes.length; i++) {
       if (shapes[selection-1].eq == true) {

@@ -45,6 +45,7 @@ var loadingtotal = 0;
 var nav;
 
 var lenguage = 0; // 0=eng, 1=esp
+var lengSel = false;
 var rpi = '';
 
 var snows = [];
@@ -158,7 +159,7 @@ function draw() {
   background (mainCol);
   noStroke();
   // if (loadcomp == 6) {
-  //   console.log(pow(10, map(shapes[0].y, 20, windowHeight-20, 4.2, 1)));
+    // console.log(track[0]);
   // }
 
 
@@ -382,6 +383,42 @@ function draw() {
     text(infoData[lenguage].windowed, windowWidth/2-100, windowHeight/2, 100, 50);
     text(infoData[lenguage].fullscreen, windowWidth/2+100, windowHeight/2, 100, 50);
 
+    // lenguage selector
+    if (lengSel == false) {
+    rectMode(CENTER);
+    fill(0);
+    rect(windowWidth/2, windowHeight/2-20, 410, 140, 5, 5, 5, 5);
+    fill(200, 120, 0, 120/2-45);
+    stroke(200, 100, 0, 120);
+    rect(windowWidth/2, windowHeight/2-20, 400, 130, 5, 5, 5, 5);
+    noFill();
+    if (mouseX >= windowWidth/2-150 && mouseX <= windowWidth/2-50 &&
+    mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
+      stroke(200, 100, 0, 120*2);
+    } else {
+      stroke(200, 100, 0, 120);
+    }
+    fill(200, 120, 0, 120/2-45);
+    rect(windowWidth/2-100, windowHeight/2, 100, 50, 5, 5, 5, 5);
+
+    if (mouseX >= windowWidth/2+50 && mouseX <= windowWidth/2+150 &&
+    mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
+      stroke(200, 100, 0, 120*2);
+    } else {
+      stroke(200, 100, 0, 120);
+    }
+
+    rect(windowWidth/2+100, windowHeight/2, 100, 50, 5, 5, 5, 5);
+    fill(200, 100, 0, 120);
+    // stroke(200, 100, 0, scrchshade);
+    noStroke();
+    textSize(25);
+    text('Lenguage / Idioma', windowWidth/2, windowHeight/2-60);
+    textSize(15);
+    text('English', windowWidth/2-100, windowHeight/2, 100, 50);
+    text('Español', windowWidth/2+100, windowHeight/2, 100, 50);
+  }
+
   // loading state
   textAlign(CENTER);
   textFont(juraBook);
@@ -420,32 +457,44 @@ function mousePressed() {
     }
   }
 
-  if (screench == true && overL == true) {
-    if (lenguage == 0) {
-      lenguage = 1;
-    } else {
-      lenguage = 0;
-    }
-  }
-
-  // screench
-  if (screench == true) {
-    if (overI == true) {
-      if (info == false) {
-        info = true;
-      } else {
-        info = false;
-      }
-    }
-  } else {
+  if (lengSel == false) {
     if (mouseX >= windowWidth/2-150 && mouseX <= windowWidth/2-50 &&
     mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
-      fullscreen(false);
-      screench = true;
+      lenguage = 0;
+      lengSel = true;
     } else if (mouseX >= windowWidth/2+50 && mouseX <= windowWidth/2+150 &&
     mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
-      fullscreen(true);
-      screench = true;
+      lenguage = 1;
+      lengSel = true;
+    }
+  } else {
+
+    if (screench == true && overL == true) {
+      if (lenguage == 0) {
+        lenguage = 1;
+      } else {
+        lenguage = 0;
+      }
+    }
+    // screench
+    if (screench == true) {
+      if (overI == true) {
+        if (info == false) {
+          info = true;
+        } else {
+          info = false;
+        }
+      }
+    } else {
+      if (mouseX >= windowWidth/2-150 && mouseX <= windowWidth/2-50 &&
+      mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
+        fullscreen(false);
+        screench = true;
+      } else if (mouseX >= windowWidth/2+50 && mouseX <= windowWidth/2+150 &&
+      mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
+        fullscreen(true);
+        screench = true;
+      }
     }
   }
 }
@@ -607,11 +656,11 @@ function tooglePlaying() {
         }
       } else if (nav == 'sf') {
         for (var i = 0; i < track.length; i++) {
-          track[i].play((6-i)*0.09);
+          track[i].play((10-i)*0.12);
         }
       } else {
         for (var i = 0; i < track.length; i++) {
-          track[i].play((6-i)*0.33);
+          track[i].play((10-i)*0.22);
         }
       }
     }
