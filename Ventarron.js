@@ -610,6 +610,7 @@ function keyPressed() {
       track[i].stop();
       playing = false;
       bossfader = 255;
+      selection = 0;
     }
   }
 
