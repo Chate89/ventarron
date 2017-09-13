@@ -38,6 +38,13 @@ function master() {
       overI = false;
   }
 
+  // over leng button
+  if (mouseX >= lside+45-30 && mouseX <= lside+45+30 &&
+  mouseY >= bottom-30-15 && mouseY <= bottom-30+15) {
+      overL = true;
+    } else {
+      overL = false;
+  }
 
   // waveform display
 

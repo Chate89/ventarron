@@ -12,8 +12,50 @@ var zomrel = 0.8;
 var octavespect = [];
 var spectrumshow = 0;
 
-
-
+var infoData = [
+  {
+    "screench": "Choose the screen mode",
+    "loading": "Loading Tracks",
+    "windowed": "windowed",
+    "fullscreen": "fullscreen",
+    "spacebar": "The spacebar will toogle between play and pause: if the music is playing will pause it, if the music is paused will play it.",
+    "spacebarBar": "spacebar",
+    "spacebarBarPress": "Press the Spacebar",
+    "shiftCtrl": "Shift key will increase the selected instrument volume, Ctrl key will decrease the selected instrument volume. The volume also can be managed scrolling with the mousewheel or the touchpad.",
+    "arrowsL": "Left Arrow key will pan the selected instrument to the left: the volume will decrease on the left speaker (right channel or R) and increase on the right speaker (left channel or L).",
+    "arrowsD": "Down Arrow key will decrease the selected instrument filter (eq) frequency. This value will afect the sound only if the filter (eq) is 'active' on the selected instrument.",
+    "arrowsR": "Right Arrow key will pan the selected instrument to the right: the volume will decrease on the left speaker (left channel or L) and increase on the right speaker (right channel or R).",
+    "arrowsU": "Up Arrow key will increase the selected instrument filter (eq) frequency. This value will afect the sound only if the filter (eq) is 'active' on the selected instrument.",
+    "mute": "the 'M' key will mute or unmute the selected instrument. Muted instruments has no volume but still playing.",
+    "solo": "the 'S' key will solo or unsolo the selected instrument. When an instrument is 'solo', the other instrument are still be playing but 'muted'.",
+    "eq": "the 'E' key will connect or disconnect the selected instrument to a BandPass filter. The BandPass frequency can be modify with the arrow keys (up and down) or with the mouse. A band-pass filter (also spelled bandpass) is a device that passes frequencies within a certain range and rejects (attenuates) frequencies outside that range.",
+    "numbers": "Numbers represent the instruments or layers of the music. You can select an instrument with the number keys on the keyboard or with the mouse",
+    "info": "The 'I' key will toogle the 'info' window on and off. You can press the key on the keyboard or the the button on the top left corner.",
+    "fullscreenKey": "The 'F' key will toogle the screen mode between windowed or fullscreen",
+    "lenguage": "This button will toogle the lenguage between ENGLISH and SPANISH. Este Boton cambiará el idioma entre ESPAÑOL e INGLES."
+  },
+  {
+    "screench": "Seleccione el modo de pantalla",
+    "windowed": "ventana",
+    "fullscreen": "pantalla completa",
+    "loading": "Cargando Pistas",
+    "spacebar": "La barra espaciadora iniciará la reproduccion en caso de que la musica este pausada, y pausara la produccion en caso de que se este reproduciendo.",
+    "spacebarBar": "barra espaciadora",
+    "spacebarBarPress": "Presioná la Barra Espaciadora",
+    "shiftCtrl": "La tecla Shift incrementara el volumen del instrumento seleccionado, la tecla Ctrl disminuirá el volumen del instrumento seleccionado. El control de volumen tambien puede manejarse con la rueda del mouse (mouse wheel) o desde el panel tactil (touchpad).",
+    "arrowsL": "La tecla de navegación 'L' paneará el instrumento seleccionado hacia la izquierda: el volumen disminuirá en el parlante derecho (canal derecho o R) y se incrementará en el parlante izquierdo (canal izquierdo o L).",
+    "arrowsD": "La tecla de navegación 'Down' disminuirá la frecuencia del filtro (eq) del instrumento selccionado. Este valor afectará al sonido unicamente si el filtro (eq) esta 'activo' en el el instrumento seleccionado.",
+    "arrowsR": "La tecla de navegacion 'R' paneará el instrumento seleccionado hacia la derecha: el volumen disminuirá en el parlante izquierdo (canal izquierdo o L) y se incrementará en el parlante derecho (canal derecho o R).",
+    "arrowsU": "La tecla de navegación 'Up' incrementará la frecuencia del filtro (eq) del instrumento selccionado. Este valor afectará al sonido unicamente si el filtro (eq) esta 'activo' en el el instrumento seleccionado.",
+    "mute": "La tecla 'M' muteará o desmuteará el instrumento seleccionado. Los instrumentos muteados no tienen volumen pero siguen reproduciendoce.",
+    "solo": "La tecla 'S' solerá (dejara sonando de forma unica) o des-soleará el instrumento seleccionado. Cuando un instrumento esta 'soleado', los demas instrumentos siguen reproduciendose pero 'muteados'.",
+    "eq": "La tecla 'E' conectará o desconectará el instrumento seleccionado a un filtro 'paso banda' (BandPass). La frecuencia del filtro puede ser modificada con las teclas de navegacion ('up' y 'down') o con el mouse. Un filtro paso banda es un tipo de filtro electrónico que deja pasar un determinado rango de frecuencias de una señal y atenúa el paso del resto.",
+    "numbers": "Los numeros representan los instrumentos o capas que conforman la musica. Puedes seleccionar un instrumento con las teclas numéricas del teclado o con el mouse",
+    "info": "La tecla 'I' abrirá o cerrará la ventana de información. Podes presionar la tecla 'i' en el teclado o el botón que se encuentra en la esquina superior izquierda con el mouse.",
+    "fullscreenKey": "La tecla 'F' cambiara el modo de pantalla entre 'pantalla completa' o 'ventana'",
+    "lenguage": "Este Boton cambiará el idioma entre ESPAÑOL e INGLES. This button will toogle the lenguage between ENGLISH and SPANISH."
+  }
+]
 
 function information() {
   // textFont("Helvetica");
@@ -56,10 +98,11 @@ function information() {
   fill(200, 100, 0, 200);
   noStroke();
   textSize(14);
-  text("spacebar", windowWidth/2-115+xpos, bottom-35);
+  text(infoData[lenguage].spacebarBar, windowWidth/2-115+xpos, bottom-35);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+
   // arrows
+  stroke(200, 100, 0, stroSatI);
   if (keyIsDown(LEFT_ARROW)) {
     fill(70, 30, 0, 255);
   } else {
@@ -68,7 +111,7 @@ function information() {
   rect(windowWidth/2+200+xpos, bottom-40, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("L", windowWidth/2+188+xpos, bottom-25);
+  text("L", windowWidth/2+188+xpos, bottom-30);
   noFill();
   stroke(200, 100, 0, stroSatI);
 
@@ -80,7 +123,7 @@ function information() {
   rect(windowWidth/2+250+xpos, bottom-40, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("Down", windowWidth/2+250+xpos, bottom-25);
+  text("Down", windowWidth/2+250+xpos, bottom-30);
   noFill();
   stroke(200, 100, 0, stroSatI);
 
@@ -92,7 +135,7 @@ function information() {
   rect(windowWidth/2+300+xpos, bottom-40, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("R", windowWidth/2+288+xpos, bottom-25);
+  text("R", windowWidth/2+288+xpos, bottom-30);
   noFill();
   stroke(200, 100, 0, 150);
 
@@ -104,7 +147,7 @@ function information() {
   rect(windowWidth/2+250+xpos, bottom-90, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("Up", windowWidth/2+250+xpos, bottom-75);
+  text("Up", windowWidth/2+250+xpos, bottom-80);
   noFill();
 
   // numbers
@@ -127,6 +170,7 @@ function information() {
     }
     rect(windowWidth/2-350+(i*50)+xpos, bottom-235, 40, 40, 5);
     noStroke();
+
     if (shapes[i].muted) {
       if (selection-1 == i) {
         fill(150, 150, 150);
@@ -138,17 +182,26 @@ function information() {
     }
 
     if (i < shapes.length-1) {
-      text((i+1), windowWidth/2-360+(i*50)+xpos, bottom-220);
+      text((i+1), windowWidth/2-360+(i*50)+xpos, bottom-225);
     } else {
-      text(0, windowWidth/2-360+(i*50)+xpos, bottom-220);
+      text(0, windowWidth/2-360+(i*50)+xpos, bottom-225);
     }
     noFill();
     stroke(200, 100, 0, stroSatI);
   }
 
-
+  for (var i = 0; i < shapes.length; i++) {
+    stroke(200, 100, 0, stroSatI);
+    fill(0);
+    rect(windowWidth/2-350+(i*50)+xpos, bottom-260, 40, 10, 5);
+    fill(shapes[i].redvalon, shapes[i].grenvalon, shapes[i].bluevalon)
+    noStroke();
+    rect(windowWidth/2-350+(i*50)+xpos, bottom-260, shapes[i].amp/20, 9);
+    fill(0);
+  }
 
   // ctrl and shift (size)
+  stroke(200, 100, 0, stroSatI);
   if (keyIsDown(SHIFT)) {
     fill(70, 30, 0, 255);
   } else {
@@ -158,8 +211,8 @@ function information() {
   rect(windowWidth/2+100+xpos, bottom-90, 80, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("Shift", windowWidth/2-353+xpos, bottom-75);
-  text("Shift", windowWidth/2+77+xpos, bottom-75);
+  text("Shift", windowWidth/2-353+xpos, bottom-80);
+  text("Shift", windowWidth/2+77+xpos, bottom-80);
   noFill();
   stroke(200, 100, 0, stroSatI);
 
@@ -172,8 +225,8 @@ function information() {
   rect(windowWidth/2+120+xpos, bottom-40, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("Ctrl", windowWidth/2-357+xpos, bottom-25);
-  text("Ctrl", windowWidth/2+113+xpos, bottom-25);
+  text("Ctrl", windowWidth/2-357+xpos, bottom-30);
+  text("Ctrl", windowWidth/2+113+xpos, bottom-30);
   noFill();
   stroke(200, 100, 0, stroSatI);
 
@@ -191,7 +244,7 @@ function information() {
   rect(windowWidth/2-280+xpos, bottom-140, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("S", windowWidth/2-290+xpos, bottom-125);
+  text("S", windowWidth/2-290+xpos, bottom-130);
   noStroke();
   for (var i = 0; i < shapes.length; i++) {
     if (shapes[i].solo) {
@@ -201,7 +254,7 @@ function information() {
       noFill();
       noStroke()
     }
-  text('s', windowWidth/2-360+(i*50)+xpos, bottom-240);
+  text('s', windowWidth/2-360+(i*50)+xpos, bottom-245);
   noStroke();
   }
 
@@ -219,7 +272,7 @@ function information() {
   rect(windowWidth/2+xpos, bottom-90, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("M", windowWidth/2-10+xpos, bottom-75);
+  text("M", windowWidth/2-10+xpos, bottom-80);
   noFill();
   noStroke();
   for (var i = 0; i < shapes.length; i++) {
@@ -232,8 +285,16 @@ function information() {
     } else {
       noFill();
     }
-  text('m', windowWidth/2-340+(i*50)+xpos, bottom-240);
+  text('m', windowWidth/2-340+(i*50)+xpos, bottom-245);
   }
+
+  // info
+  fill(70, 30, 0, 255);
+  stroke(200, 100, 0, stroSatI);
+  rect(windowWidth/2+20+xpos, bottom-190, 40, 40, 5);
+  fill(200, 100, 0, 200);
+  noStroke();
+  text("I", windowWidth/2+30+xpos, bottom-180);
 
   // eq
   noFill();
@@ -250,7 +311,7 @@ function information() {
   rect(windowWidth/2-240+xpos, bottom-190, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("E", windowWidth/2-250+xpos, bottom-175);
+  text("E", windowWidth/2-250+xpos, bottom-180);
   noFill();
   for (var i = 0; i < shapes.length; i++) {
     if (shapes[i].eq) {
@@ -263,35 +324,29 @@ function information() {
       } else {
         fill(200, 100, 0, 200);
       }
-      text('Eq', windowWidth/2-340+(i*50)+xpos, bottom-220);
+      text('Eq', windowWidth/2-340+(i*50)+xpos, bottom-225);
     }
   }
   stroke(200, 100, 0, stroSatI);
 
-  // mute & solo (letters)
-  // noFill();
-  // for (var i = 0; i < shapes.length; i++) {
-  //   if (shapes[i].solo == false) {
-  //     if (shapes[i].muted == true) {
-  //       textSize(8);
-  //       stroke(100, 50, 0, 255);
-  //       textAlign(CENTER);
-  //       text('M', windowWidth/2-350+(i*50)+xpos, windowHeight/2-95+ypos)
-  //     }
-  //   } else {
-  //     textSize(10);
-  //     textAlign(CENTER);
-  //     fill(160, 150, 0);
-  //     stroke(160, 150, 0);
-  //     text('S', windowWidth/2-350+(i*50)+xpos, windowHeight/2-95+ypos)
-  //     fill(70, 30, 0, 255);
-  //     stroke(100, 50, 0, 255);
-  //   }
-  // }
+  // fullscreen
+  noFill();
+  if (fullscreen()) {
+    fill(70, 30, 0, 255);
+  } else {
+    fill(0);
+  }
+  stroke(200, 100, 0, stroSatI);
+  rect(windowWidth/2-190+xpos, bottom-140, 40, 40, 5);
+  fill(200, 100, 0, 200);
+  noStroke();
+  text("F", windowWidth/2-200+xpos, bottom-130);
+  stroke(200, 100, 0, stroSatI);
+
+
+
 
   // selected shape
-
-  // yinfo = 10+(bottom - 20)/3;
   if (windowHeight > 680) {
     yinfo = ((bottom - 20)/3)-10;
     zomrel = 0.45
@@ -329,15 +384,10 @@ function information() {
     fill(shapes[selection-1].redvalon, shapes[selection-1].grenvalon, shapes[selection-1].bluevalon);
     noStroke();
     ellipse(xinfo-253-100, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+130, yinfo-130), 15, 15);
-    text(int(shapes[selection-1].freq)+' Hz', xinfo-253-140, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+130, yinfo-130)+5);
+    text(int(shapes[selection-1].freq)+' Hz', xinfo-253-140, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+125, yinfo-135)+5);
     fill(0);
-    text(int(shapes[selection-1].selection+1), xinfo-253-101, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+130, yinfo-130)+4);
+    text(int(shapes[selection-1].selection+1), xinfo-253-101, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+125, yinfo-135)+4);
   }
-
-
-
-  // fft analyse
-  // fft.analyze();
 
   // eq bars
   rectMode(CORNER);
@@ -421,11 +471,7 @@ function information() {
       }
     }
   }
-
   rectMode(CENTER);
-
-
-
 
   // visualisation
   if (selection != 0) {
@@ -454,8 +500,100 @@ function information() {
     endShape();
   }
 
-
-
+  // right panel information (mouseover)
+  if (mouseX >= windowWidth/2-115+xpos-140 &&
+      mouseX <= windowWidth/2-115+xpos+140 &&
+      mouseY >= bottom-40-20 &&
+      mouseY <= bottom-40+20) {
+    //mouseoverSpace
+    rpi = infoData[lenguage].spacebar
+  } else if (mouseX >= windowWidth/2+200+xpos-20 &&
+      mouseX <= windowWidth/2+200+xpos+20 &&
+      mouseY >= bottom-40-20 &&
+      mouseY <= bottom-40+20) {
+    //mouseoverL
+    rpi = infoData[lenguage].arrowsL
+  } else if (mouseX >= windowWidth/2+250+xpos-20 &&
+      mouseX <= windowWidth/2+250+xpos+20 &&
+      mouseY >= bottom-40-20 &&
+      mouseY <= bottom-40+20) {
+    //mouseoverD
+    rpi = infoData[lenguage].arrowsD
+  } else if (mouseX >= windowWidth/2+300+xpos-20 &&
+      mouseX <= windowWidth/2+300+xpos+20 &&
+      mouseY >= bottom-40-20 &&
+      mouseY <= bottom-40+20) {
+    //mouseoverR
+    rpi = infoData[lenguage].arrowsR
+  } else if (mouseX >= windowWidth/2+250+xpos-20 &&
+      mouseX <= windowWidth/2+250+xpos+20 &&
+      mouseY >= bottom-90-20 &&
+      mouseY <= bottom-90+20) {
+    //mouseoverU
+    rpi = infoData[lenguage].arrowsU
+  } else if (mouseX >= windowWidth/2-350+xpos-20 &&
+      mouseX <= windowWidth/2-350+((numShapes-1)*50)+xpos+20 &&
+      mouseY >= bottom-235-20 &&
+      mouseY <= bottom-235+20) {
+    //mouseoverNums
+    rpi = infoData[lenguage].numbers
+  } else if (mouseX >= windowWidth/2-330+xpos-40 &&
+      mouseX <= windowWidth/2-330+xpos+40 &&
+      mouseY >= bottom-90-20 &&
+      mouseY <= bottom-90+20) {
+    rpi = infoData[lenguage].shiftCtrl
+  } else if (mouseX >= windowWidth/2+100+xpos-40 &&
+      mouseX <= windowWidth/2+100+xpos+40 &&
+      mouseY >= bottom-90-20 &&
+      mouseY <= bottom-90+20) {
+    rpi = infoData[lenguage].shiftCtrl
+  } else if (mouseX >= windowWidth/2-350+xpos-20 &&
+      mouseX <= windowWidth/2-350+xpos+20 &&
+      mouseY >= bottom-40-20 &&
+      mouseY <= bottom-40+20) {
+    rpi = infoData[lenguage].shiftCtrl
+  } else if (mouseX >= windowWidth/2+120+xpos-20 &&
+      mouseX <= windowWidth/2+120+xpos+20 &&
+      mouseY >= bottom-40-20 &&
+      mouseY <= bottom-40+20) {
+    rpi = infoData[lenguage].shiftCtrl
+  } else if (mouseX >= windowWidth/2-280+xpos-20 &&
+      mouseX <= windowWidth/2-280+xpos+20 &&
+      mouseY >= bottom-140-20 &&
+      mouseY <= bottom-140+20) {
+    // overSolo
+    rpi = infoData[lenguage].solo
+  } else if (mouseX >= windowWidth/2+xpos-20 &&
+      mouseX <= windowWidth/2+xpos+20 &&
+      mouseY >= bottom-90-20 &&
+      mouseY <= bottom-90+20) {
+    // overMute
+    rpi = infoData[lenguage].mute
+  } else if (mouseX >= windowWidth/2-240+xpos-20 &&
+      mouseX <= windowWidth/2-240+xpos+20 &&
+      mouseY >= bottom-190-20 &&
+      mouseY <= bottom-190+20) {
+    // overEq
+    rpi = infoData[lenguage].eq
+  } else if (mouseX >= windowWidth/2+20+xpos-20 &&
+      mouseX <= windowWidth/2+20+xpos+20 &&
+      mouseY >= bottom-190-20 &&
+      mouseY <= bottom-190+20) {
+    // overInf
+    rpi = infoData[lenguage].info
+  } else if (overI) {
+    rpi = infoData[lenguage].info
+  } else if (mouseX >= windowWidth/2-190+xpos-20 &&
+      mouseX <= windowWidth/2-190+xpos+20 &&
+      mouseY >= bottom-140-20 &&
+      mouseY <= bottom-140+20) {
+    // overInf
+    rpi = infoData[lenguage].fullscreenKey
+  } else if (overL) {
+    rpi = infoData[lenguage].lenguage
+  } else {
+    rpi = ''
+  }
 
   // left panel information
   noStroke();
@@ -465,8 +603,8 @@ function information() {
   }
   var promlat = (track[0].currentTime())-(track[track.length-1].currentTime());
 
-  text(abs(promlat).toFixed(4), lside-100, 600);
-  text('navigator: '+nav, lside-100, 620);
+  text(abs(promlat).toFixed(4), lside-100, 500);
+  text('navigator: '+nav, lside-100, 520);
 
 
 

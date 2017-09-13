@@ -106,9 +106,19 @@ function Shape() {
       curveVertex (this.centX, this.centY);
     }
     endShape();
-    textAlign(CENTER);
-    textSize(15);
-    text(floor(this.freq), this.x, this.y)
+    if (this.selection == selection-1) {
+      textAlign(CENTER);
+      textSize(15);
+      text('vol: '+this.volume, this.x, this.y-20);
+      if (floor(100*this.pan) > 0) {
+        text('pan: '+ abs(100*(this.pan.toFixed(2))).toFixed(0)+'R', this.x, this.y);
+      } else if (floor(100*this.pan) == 0) {
+        text('pan: '+ 'C', this.x, this.y);
+      } else if (floor(100*this.pan) < 0) {
+        text('pan: '+ abs(100*(this.pan.toFixed(2))).toFixed(0)+'L', this.x, this.y);
+      }
+      text('freq: '+floor(this.freq), this.x, this.y+20);
+    }
 
 
     if (this.size <= 0) {

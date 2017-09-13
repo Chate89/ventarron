@@ -34,18 +34,22 @@ var mainCol = 0;
 var botlock = false;
 var loadshade;
 var overI = false;
+var overL = false
 var wheel = 0;
 
 //fullscreen choose
 var screench = false;
 var scrchshade = 255;
 var mainshade = 255;
-
 var loadingtotal = 0;
 var nav;
 
+var lenguage = 0; // 0=eng, 1=esp
+var rpi = '';
 
 var snows = [];
+
+
 
 function preload() {
   juraBook = loadFont('data/Jura-Book.ttf');
@@ -286,7 +290,32 @@ function draw() {
   textSize(12);
   textFont('Arial');
   textStyle(ITALIC);
-  text("Info", lside+30, topy+34);
+  text("Info", lside+30, topy+30);
+  textStyle(NORMAL);
+  noFill();
+  stroke(200, 100, 0, stroSatI);
+  rectMode(CORNER);
+  textFont(juraBook);
+
+  // leng buttom
+    if (overL == true) {
+    stroke(200, 100, 0, 255);
+  } else {
+    stroke(200, 100, 0, 100);
+  }
+  rectMode(CENTER)
+  fill(0, 200);
+  rect(lside+45, bottom-30, 60, 30, 5);
+  fill(200, 100, 0, 100);
+  noStroke();
+  textSize(12);
+  textFont('Arial');
+  textStyle(ITALIC);
+  if (lenguage == 0) {
+    text("Leng: EN", lside+45, bottom-30);
+  } else {
+    text("Leng: ES", lside+45, bottom-30);
+  }
   textStyle(NORMAL);
   noFill();
   stroke(200, 100, 0, stroSatI);
@@ -326,7 +355,7 @@ function draw() {
     rectMode(CENTER);
     fill(200, 120, 0, scrchshade/2-45);
     stroke(200, 100, 0, scrchshade);
-    rect(windowWidth/2, windowHeight/2-20, 350, 130, 5, 5, 5, 5);
+    rect(windowWidth/2, windowHeight/2-20, 400, 130, 5, 5, 5, 5);
     noFill();
     if (mouseX >= windowWidth/2-150 && mouseX <= windowWidth/2-50 &&
     mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
@@ -348,10 +377,10 @@ function draw() {
     // stroke(200, 100, 0, scrchshade);
     noStroke();
     textSize(25);
-    text("choose the screen mode", windowWidth/2, windowHeight/2-50)
+    text(infoData[lenguage].screench, windowWidth/2, windowHeight/2-60)
     textSize(15);
-    text("windowed", windowWidth/2-100, windowHeight/2);
-    text("fullscreen", windowWidth/2+100, windowHeight/2);
+    text(infoData[lenguage].windowed, windowWidth/2-100, windowHeight/2, 100, 50);
+    text(infoData[lenguage].fullscreen, windowWidth/2+100, windowHeight/2, 100, 50);
 
   // loading state
   textAlign(CENTER);
@@ -369,13 +398,13 @@ function draw() {
     noStroke();
     fill(100, 50, 0, loadshade);
     textSize(20);
-    text("Loading Tracks", windowWidth/2, windowHeight/2+100);
+    text(infoData[lenguage].loading, windowWidth/2, windowHeight/2+100);
     textSize(20);
-    text("(" + loadcomp + " of " + track.length +")",  windowWidth/2, windowHeight/2+120);
+    text("(" + loadcomp + " / " + track.length +")",  windowWidth/2, windowHeight/2+120);
     fill(100, 150-loadshade);
     fill(50, 255-loadshade);
     if (screench == true) {
-      text("Press the Spacebar", windowWidth/2, 3*windowHeight/4);
+      text(infoData[lenguage].spacebarBarPress, windowWidth/2, 3*windowHeight/4);
     }
   }
 }
@@ -388,6 +417,14 @@ function mousePressed() {
         selection = i+1;
       } else if (shapes[i].mouseover == false && selection == i+1)
       selection = 0;
+    }
+  }
+
+  if (screench == true && overL == true) {
+    if (lenguage == 0) {
+      lenguage = 1;
+    } else {
+      lenguage = 0;
     }
   }
 
@@ -411,10 +448,6 @@ function mousePressed() {
       screench = true;
     }
   }
-
-  // info
-
-
 }
 
 function mouseWheel(event) {
@@ -630,6 +663,15 @@ function panels() {
       rside = windowWidth-5;
     }
   }
+
+  // right panel information
+  fill(200, 100, 0, 200);
+  noStroke();
+  // rectMode(CORNER);
+  textAlign(CENTER, CENTER);
+  textSize(17);
+  text(rpi, rside+20, topy+10, 170, bottom-10);
+  stroke(200, 100, 0, 150);
 
   // panel slide: left
   if ((mouseX < lside || info == true) && (mouseIsPressed == false || lside >= 200)) {
