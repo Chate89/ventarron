@@ -605,7 +605,7 @@ function information() {
   }
   var promlat = (track[0].currentTime())-(track[track.length-1].currentTime());
 
-  text(abs(promlat).toFixed(4), lside-100, 500);
+  text("latencia: "+abs(promlat).toFixed(4), lside-100, 500);
   text('navigator: '+nav, lside-100, 520);
 
 

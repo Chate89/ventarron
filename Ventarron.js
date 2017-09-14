@@ -111,7 +111,7 @@ function setup() {
   // randomizer & track loading
   for (var i = 0; i < numShapes; i++) {
     raTr[i] = floor(random(0, versions[i]))+1;
-    track[i] = loadSound("data/Module0" + (i) + "/00_" + raTr[i] + '.mp3', loaded);
+    track[i] = loadSound("data/Module0" + (i) + "/00_" + raTr[i] + '.mp3', loaded, null, progress);
   }
 
   // ffts
@@ -155,11 +155,14 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
+function progress(evt) {
+  console.log(((evt.toFixed(2)*100)+1).toFixed(0));
+}
+
 function draw() {
   background (mainCol);
   noStroke();
   // if (loadcomp == 6) {
-    // console.log(track[0]);
   // }
 
 
