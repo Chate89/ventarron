@@ -2,6 +2,7 @@ var acel = 0.1;
 var divi = 1;
 
 function Shape() {
+  this.loadedPorc = 0;
   // metadata values
   this.metadata = function () {
     this.metavol = floor(map((split(metadata[this.selection*5],":")[1]), 0, 100, 0, 500));

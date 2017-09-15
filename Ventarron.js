@@ -48,6 +48,7 @@ var lenguage = 0; // 0=eng, 1=esp
 var lengSel = false;
 var rpi = '';
 var reseter = true;
+var porcentOK = 0;
 
 var snows = [];
 
@@ -109,8 +110,18 @@ function setup() {
   // randomizer & track loading
   for (var i = 0; i < numShapes; i++) {
     raTr[i] = floor(random(0, versions[i]))+1;
-    track[i] = loadSound("data/Module0" + (i) + "/00_" + raTr[i] + '.mp3', loaded, null, progress);
   }
+
+  track[0] = loadSound("data/Module0" + (0) + "/00_" + raTr[0] + '.mp3', loaded, null, progress0);
+  track[1] = loadSound("data/Module0" + (1) + "/00_" + raTr[1] + '.mp3', loaded, null, progress1);
+  track[2] = loadSound("data/Module0" + (2) + "/00_" + raTr[2] + '.mp3', loaded, null, progress2);
+  track[3] = loadSound("data/Module0" + (3) + "/00_" + raTr[3] + '.mp3', loaded, null, progress3);
+  track[4] = loadSound("data/Module0" + (4) + "/00_" + raTr[4] + '.mp3', loaded, null, progress4);
+  track[5] = loadSound("data/Module0" + (5) + "/00_" + raTr[5] + '.mp3', loaded, null, progress5);
+  track[6] = loadSound("data/Module0" + (6) + "/00_" + raTr[6] + '.mp3', loaded, null, progress6);
+  track[7] = loadSound("data/Module0" + (7) + "/00_" + raTr[7] + '.mp3', loaded, null, progress6);
+  track[8] = loadSound("data/Module0" + (8) + "/00_" + raTr[8] + '.mp3', loaded, null, progress8);
+  track[9] = loadSound("data/Module0" + (9) + "/00_" + raTr[9] + '.mp3', loaded, null, progress9);
 
   // ffts
   for (var i = 0; i < numShapes; i++) {
@@ -153,8 +164,35 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-function progress(evt) {
-  console.log(((evt.toFixed(2)*100)+1).toFixed(0));
+function progress0(evt) {
+  shapes[0].loadedPorc = evt+0.01;
+}
+function progress1(evt) {
+  shapes[1].loadedPorc = evt+0.01;
+}
+function progress2(evt) {
+  shapes[2].loadedPorc = evt+0.01;
+}
+function progress3(evt) {
+  shapes[3].loadedPorc = evt+0.01;
+}
+function progress4(evt) {
+  shapes[4].loadedPorc = evt+0.01;
+}
+function progress5(evt) {
+  shapes[5].loadedPorc = evt+0.01;
+}
+function progress6(evt) {
+  shapes[6].loadedPorc = evt+0.01;
+}
+function progress7(evt) {
+  shapes[7].loadedPorc = evt+0.01;
+}
+function progress8(evt) {
+  shapes[8].loadedPorc = evt+0.01;
+}
+function progress9(evt) {
+  shapes[9].loadedPorc = evt+0.01;
 }
 
 function draw() {
@@ -162,6 +200,11 @@ function draw() {
   noStroke();
   // if (loadcomp == 6) {
   // }
+ porcentOK = shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
+ shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
+ shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
+ shapes[0].loadedPorc
+
 
   // trigger nodeSources reseter
   if (loadcomp == track.length && playing == false && reseter == true && track[0].currentTime() > 0) {
@@ -170,6 +213,9 @@ function draw() {
   } else if (playing == true) {
     reseter = true;
   }
+
+  console.log(((porcentOK/10)).toFixed(3));
+
 
   // console.log();
 
@@ -454,6 +500,15 @@ function draw() {
       text(infoData[lenguage].spacebarBarPress, windowWidth/2, 3*windowHeight/4);
     }
   }
+  fill(0);
+  stroke(200, 100, 0, loadshade);
+  rect(windowWidth/2, windowHeight/2+150, 300, 10, 5, 5, 5, 5);
+  // rect(windowWidth/2, windowHeight/2+170, 300, 10, 5, 5, 5, 5);
+  rectMode(CORNER)
+  fill(200, 100, 0, loadshade)
+  rect(windowWidth/2-150, windowHeight/2+150-5, 300*((porcentOK/10)).toFixed(3), 10, 5, 5, 5, 5);
+  // rect(windowWidth/2-150, windowHeight/2+170-5, 300*(loadcomp/track.length), 10, 5, 5, 5, 5);
+  rectMode(CENTER);
 }
 
 function mousePressed() {
