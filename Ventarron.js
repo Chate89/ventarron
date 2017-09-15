@@ -503,11 +503,11 @@ function draw() {
   fill(0);
   stroke(200, 100, 0, loadshade);
   rect(windowWidth/2, windowHeight/2+150, 300, 10, 5, 5, 5, 5);
-  // rect(windowWidth/2, windowHeight/2+170, 300, 10, 5, 5, 5, 5);
+  rect(windowWidth/2, windowHeight/2+170, 300, 10, 5, 5, 5, 5);
   rectMode(CORNER)
   fill(200, 100, 0, loadshade)
   rect(windowWidth/2-150, windowHeight/2+150-5, 300*((porcentOK/10)).toFixed(3), 10, 5, 5, 5, 5);
-  // rect(windowWidth/2-150, windowHeight/2+170-5, 300*(loadcomp/track.length), 10, 5, 5, 5, 5);
+  rect(windowWidth/2-150, windowHeight/2+170-5, 300*(loadcomp/track.length), 10, 5, 5, 5, 5);
   rectMode(CENTER);
 }
 
