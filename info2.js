@@ -11,7 +11,31 @@ var zomrel = 0.8;
 
 var octavespect = [];
 var spectrumshow = 0;
-
+var modules = [[
+      "Vocal",
+      "Electric Guitar 1",
+      "Electric Guitar 2",
+      "Electric Guitar 3",
+      "Electric Guitar 4",
+      "Keyboard",
+      "FX and Sequencer",
+      "Pad",
+      "Acoustic Guitar",
+      "Drumm and Bass"
+  ],
+  [
+      "Voz",
+      "Guitarra Eléctrica 1",
+      "Guitarra Eléctrica 2",
+      "Guitarra Eléctrica 3",
+      "Guitarra Eléctrica 4",
+      "Teclado",
+      "FX y Sequencer",
+      "Pad",
+      "Guitarra Acústica",
+      "Bajo y Batería"
+  ]
+]
 var infoData = [
   {
     "screench": "Choose the screen mode",
@@ -595,6 +619,19 @@ function information() {
     rpi = infoData[lenguage].lenguage
   } else {
     rpi = ''
+  }
+
+  for (var i = 0; i < track.length; i++) {
+    if (mouseX >= windowWidth/2-350+(i*50)+xpos-20 &&
+        mouseX <= windowWidth/2-350+(i*50)+xpos+20 &&
+        mouseY >= bottom-235-20 &&
+        mouseY <= bottom-235+20) {
+      fill(0, 100);
+      noStroke();
+      rect(mouseX+10, mouseY+30, 130, 20, 5, 5, 5, 5)
+      fill(200, 100, 0);
+      text(modules[lenguage][i], mouseX+10, mouseY+30);
+    }
   }
 
   // left panel information

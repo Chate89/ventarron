@@ -214,11 +214,6 @@ function draw() {
     reseter = true;
   }
 
-  console.log(((porcentOK/10)).toFixed(3));
-
-
-  // console.log();
-
   for (var i = 0; i < shapes.length; i++) {
     ffts[i].analyze();
   }
@@ -231,6 +226,7 @@ function draw() {
   if (scrchshade < 1) {
     for (var i = 0; i < shapes.length; i++) {
       // shapes[i].nodes = raTr[i]+1;
+      shapes[i].module = i;
       shapes[i].display();
       shapes[i].overing();
       shapes[i].boost();
@@ -289,7 +285,6 @@ function draw() {
 
   // timecorrection trigger
   if (loadcomp == 6 && abs(track[0].currentTime()-track[5].currentTime()) >= 0.1) {
-    // console.log(abs(track[0].currentTime()-track[5].currentTime()));
     timecorrection();
   }
 
