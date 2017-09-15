@@ -496,19 +496,21 @@ function draw() {
     text("(" + loadcomp + " / " + track.length +")",  windowWidth/2, windowHeight/2+120);
     fill(100, 150-loadshade);
     fill(50, 255-loadshade);
+    if (loadshade != 0) {
+      fill(0);
+      stroke(200, 100, 0, loadshade);
+      rect(windowWidth/2, windowHeight/2+150, 300, 10, 5, 5, 5, 5);
+      rect(windowWidth/2, windowHeight/2+170, 300, 10, 5, 5, 5, 5);
+      rectMode(CORNER)
+      fill(200, 100, 0, loadshade)
+      rect(windowWidth/2-150, windowHeight/2+150-5, 300*((porcentOK/10)).toFixed(3), 10, 5, 5, 5, 5);
+      rect(windowWidth/2-150, windowHeight/2+170-5, 300*(loadcomp/track.length), 10, 5, 5, 5, 5);
+      rectMode(CENTER);
+    }
     if (screench == true) {
       text(infoData[lenguage].spacebarBarPress, windowWidth/2, 3*windowHeight/4);
     }
   }
-  fill(0);
-  stroke(200, 100, 0, loadshade);
-  rect(windowWidth/2, windowHeight/2+150, 300, 10, 5, 5, 5, 5);
-  rect(windowWidth/2, windowHeight/2+170, 300, 10, 5, 5, 5, 5);
-  rectMode(CORNER)
-  fill(200, 100, 0, loadshade)
-  rect(windowWidth/2-150, windowHeight/2+150-5, 300*((porcentOK/10)).toFixed(3), 10, 5, 5, 5, 5);
-  rect(windowWidth/2-150, windowHeight/2+170-5, 300*(loadcomp/track.length), 10, 5, 5, 5, 5);
-  rectMode(CENTER);
 }
 
 function mousePressed() {
