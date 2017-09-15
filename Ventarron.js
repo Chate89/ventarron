@@ -47,10 +47,9 @@ var nav;
 var lenguage = 0; // 0=eng, 1=esp
 var lengSel = false;
 var rpi = '';
+var reseter = true;
 
 var snows = [];
-
-
 
 function preload() {
   juraBook = loadFont('data/Jura-Book.ttf');
@@ -76,7 +75,6 @@ function setup() {
    if (navigator.userAgent.search("MSIE") >= 0) {
      nav = 'ie';
    }
-
    //Check if browser is Chrome
    else if (navigator.userAgent.search("Chrome") >= 0) {
      nav = 'ch';
@@ -165,6 +163,15 @@ function draw() {
   // if (loadcomp == 6) {
   // }
 
+  // trigger nodeSources reseter
+  if (loadcomp == track.length && playing == false && reseter == true && track[0].currentTime() > 0) {
+    resetNodesTrigger();
+    reseter = false;
+  } else if (playing == true) {
+    reseter = true;
+  }
+
+  // console.log();
 
   for (var i = 0; i < shapes.length; i++) {
     ffts[i].analyze();
@@ -660,11 +667,11 @@ function tooglePlaying() {
         }
       } else if (nav == 'sf') {
         for (var i = 0; i < track.length; i++) {
-          track[i].play((10-i)*0.12);
+          track[i].play();
         }
       } else {
         for (var i = 0; i < track.length; i++) {
-          track[i].play((10-i)*0.22);
+          track[i].play();
         }
       }
     }
@@ -673,6 +680,13 @@ function tooglePlaying() {
     } else if (playing == false) {
       playing = true;
     }
+  }
+}
+
+function resetNodesTrigger() {
+  for (var i = 0; i < track.length; i++) {
+    track[i].resetNodes();
+    console.log('reseted');
   }
 }
 
