@@ -112,16 +112,16 @@ function setup() {
     raTr[i] = floor(random(0, versions[i]))+1;
   }
 
-  track[0] = loadSound("data/Module0" + (0) + "/00_" + raTr[0] + '.mp3', loaded, null, progress0);
-  track[1] = loadSound("data/Module0" + (1) + "/00_" + raTr[1] + '.mp3', loaded, null, progress1);
-  track[2] = loadSound("data/Module0" + (2) + "/00_" + raTr[2] + '.mp3', loaded, null, progress2);
-  track[3] = loadSound("data/Module0" + (3) + "/00_" + raTr[3] + '.mp3', loaded, null, progress3);
-  track[4] = loadSound("data/Module0" + (4) + "/00_" + raTr[4] + '.mp3', loaded, null, progress4);
-  track[5] = loadSound("data/Module0" + (5) + "/00_" + raTr[5] + '.mp3', loaded, null, progress5);
-  track[6] = loadSound("data/Module0" + (6) + "/00_" + raTr[6] + '.mp3', loaded, null, progress6);
-  track[7] = loadSound("data/Module0" + (7) + "/00_" + raTr[7] + '.mp3', loaded, null, progress6);
-  track[8] = loadSound("data/Module0" + (8) + "/00_" + raTr[8] + '.mp3', loaded, null, progress8);
-  track[9] = loadSound("data/Module0" + (9) + "/00_" + raTr[9] + '.mp3', loaded, null, progress9);
+  track[0] = loadSound("data/Module0" + (0) + "/00_" + raTr[0] + '.ogg', loaded, null, progress0);
+  track[1] = loadSound("data/Module0" + (1) + "/00_" + raTr[1] + '.ogg', loaded, null, progress1);
+  track[2] = loadSound("data/Module0" + (2) + "/00_" + raTr[2] + '.ogg', loaded, null, progress2);
+  track[3] = loadSound("data/Module0" + (3) + "/00_" + raTr[3] + '.ogg', loaded, null, progress3);
+  track[4] = loadSound("data/Module0" + (4) + "/00_" + raTr[4] + '.ogg', loaded, null, progress4);
+  track[5] = loadSound("data/Module0" + (5) + "/00_" + raTr[5] + '.ogg', loaded, null, progress5);
+  track[6] = loadSound("data/Module0" + (6) + "/00_" + raTr[6] + '.ogg', loaded, null, progress6);
+  track[7] = loadSound("data/Module0" + (7) + "/00_" + raTr[7] + '.ogg', loaded, null, progress6);
+  track[8] = loadSound("data/Module0" + (8) + "/00_" + raTr[8] + '.ogg', loaded, null, progress8);
+  track[9] = loadSound("data/Module0" + (9) + "/00_" + raTr[9] + '.ogg', loaded, null, progress9);
 
   // ffts
   for (var i = 0; i < numShapes; i++) {
