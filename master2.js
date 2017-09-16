@@ -6,6 +6,7 @@ function master() {
       playing = false;
       bossfader = 255;
     }
+    resetNodesTrigger();
   }
   rectMode(CORNERS);
   fill(mainCol, 150);

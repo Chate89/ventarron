@@ -36,6 +36,7 @@ var loadshade;
 var overI = false;
 var overL = false
 var wheel = 0;
+var masterpos = 0;
 
 //fullscreen choose
 var screench = false;
@@ -68,8 +69,9 @@ function setup() {
   bottom = windowHeight - 10;
   lside = 5;
   rside = windowWidth - 5;
-  mouseX = windowWidth/2
-  mouseY = windowHeight/2
+  mouseX = windowWidth/2;
+  mouseY = windowHeight/2;
+  masterpos = windowHeight/2;
 
  // navigator
  //Check if browser is IE
@@ -787,11 +789,13 @@ function keyPressed() {
   // stop
   if (keyCode == ENTER) {
     for (var i = 0; i < track.length; i++) {
+      track[i].pause();
       track[i].stop();
       playing = false;
       bossfader = 255;
       selection = 0;
     }
+    resetNodesTrigger();
   }
 
   // hardReset: metadata
@@ -924,6 +928,14 @@ function panels() {
       lside = 5
     }
   }
+  stroke(200, 100, 0, 150);
+  fill(0);
+  rectMode(CENTER, CENTER);
+  rect(lside-30, windowHeight/2, 6, 400, 3, 3, 3, 3);
+  fill(70, 30, 0)
+  rect(lside-30, masterpos, 20, 10, 3, 3, 3, 3)
+  rectMode(CORNER);
+  fill(0);
 
   // panel slide: bottom
   if (botlock == false) {
