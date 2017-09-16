@@ -11,7 +11,8 @@ var zomrel = 0.8;
 
 var octavespect = [];
 var spectrumshow = 0;
-var modules = [[
+var modules = [
+  [
       "Vocal",
       "Electric Guitar 1",
       "Electric Guitar 2",
@@ -56,7 +57,8 @@ var infoData = [
     "numbers": "Numbers represent the instruments or layers of the music. You can select an instrument with the number keys on the keyboard or with the mouse",
     "info": "The 'I' key will toogle the 'info' window on and off. You can press the key on the keyboard or the the button on the top left corner.",
     "fullscreenKey": "The 'F' key will toogle the screen mode between windowed or fullscreen",
-    "lenguage": "This button will toogle the lenguage between ENGLISH and SPANISH. Este Boton cambiará el idioma entre ESPAÑOL e INGLES."
+    "lenguage": "This button will toogle the lenguage between ENGLISH and SPANISH. Este Boton cambiará el idioma entre ESPAÑOL e INGLES.",
+    "reset": "The 'R' key will set the mix in the original state."
   },
   {
     "screench": "Seleccione el modo de pantalla",
@@ -77,7 +79,8 @@ var infoData = [
     "numbers": "Los números representan los instrumentos o capas que conforman la música. Puedes seleccionar un instrumento con las teclas numéricas del teclado o con el mouse",
     "info": "La tecla 'I' abrirá o cerrará la ventana de información. Podes presionar la tecla 'i' en el teclado o el botón que se encuentra en la esquina superior izquierda con el mouse.",
     "fullscreenKey": "La tecla 'F' cambiara el modo de pantalla entre 'pantalla completa' o 'ventana'",
-    "lenguage": "Este botón cambiará el idioma entre ESPAÑOL e INGLES. This button will toogle the lenguage between ENGLISH and SPANISH."
+    "lenguage": "Este botón cambiará el idioma entre ESPAÑOL e INGLES. This button will toogle the lenguage between ENGLISH and SPANISH.",
+    "reset": "La tecla 'R' seteará la mezcla en su estado original."
   }
 ]
 
@@ -266,10 +269,10 @@ function information() {
       }
     }
   }
-  rect(windowWidth/2-280+xpos, bottom-140, 40, 40, 5);
+  rect(windowWidth/2-270+xpos, bottom-140, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("S", windowWidth/2-290+xpos, bottom-130);
+  text("S", windowWidth/2-280+xpos, bottom-130);
   noStroke();
   for (var i = 0; i < shapes.length; i++) {
     if (shapes[i].solo) {
@@ -363,10 +366,25 @@ function information() {
     fill(0);
   }
   stroke(200, 100, 0, stroSatI);
-  rect(windowWidth/2-190+xpos, bottom-140, 40, 40, 5);
+  rect(windowWidth/2-180+xpos, bottom-140, 40, 40, 5);
   fill(200, 100, 0, 200);
   noStroke();
-  text("F", windowWidth/2-200+xpos, bottom-130);
+  text("F", windowWidth/2-190+xpos, bottom-130);
+  stroke(200, 100, 0, stroSatI);
+
+  // reset metadata
+  noFill();
+  if (keyIsPressed == true && key == 'r') {
+    fill(70, 30, 0, 255);
+  } else {
+    fill(0);
+  }
+  stroke(200, 100, 0, stroSatI);
+  rect(windowWidth/2-190+xpos, bottom-190, 40, 40, 5);
+  fill(200, 100, 0, 200);
+  noStroke();
+  text("R", windowWidth/2-200+xpos, bottom-180);
+  noFill();
   stroke(200, 100, 0, stroSatI);
 
 
@@ -583,8 +601,8 @@ function information() {
       mouseY >= bottom-40-20 &&
       mouseY <= bottom-40+20) {
     rpi = infoData[lenguage].shiftCtrl
-  } else if (mouseX >= windowWidth/2-280+xpos-20 &&
-      mouseX <= windowWidth/2-280+xpos+20 &&
+  } else if (mouseX >= windowWidth/2-270+xpos-20 &&
+      mouseX <= windowWidth/2-270+xpos+20 &&
       mouseY >= bottom-140-20 &&
       mouseY <= bottom-140+20) {
     // overSolo
@@ -595,12 +613,18 @@ function information() {
       mouseY <= bottom-90+20) {
     // overMute
     rpi = infoData[lenguage].mute
-  } else if (mouseX >= windowWidth/2-240+xpos-20 &&
-      mouseX <= windowWidth/2-240+xpos+20 &&
+  } else if (mouseX >= windowWidth/2-190+xpos-20 &&
+      mouseX <= windowWidth/2-190+xpos+20 &&
       mouseY >= bottom-190-20 &&
       mouseY <= bottom-190+20) {
-    // overEq
-    rpi = infoData[lenguage].eq
+    // overReset
+    rpi = infoData[lenguage].reset
+  } else if (mouseX >= windowWidth/2+20+xpos-20 &&
+      mouseX <= windowWidth/2+20+xpos+20 &&
+      mouseY >= bottom-190-20 &&
+      mouseY <= bottom-190+20) {
+    // overInf
+    rpi = infoData[lenguage].info
   } else if (mouseX >= windowWidth/2+20+xpos-20 &&
       mouseX <= windowWidth/2+20+xpos+20 &&
       mouseY >= bottom-190-20 &&
@@ -609,8 +633,8 @@ function information() {
     rpi = infoData[lenguage].info
   } else if (overI) {
     rpi = infoData[lenguage].info
-  } else if (mouseX >= windowWidth/2-190+xpos-20 &&
-      mouseX <= windowWidth/2-190+xpos+20 &&
+  } else if (mouseX >= windowWidth/2-180+xpos-20 &&
+      mouseX <= windowWidth/2-180+xpos+20 &&
       mouseY >= bottom-140-20 &&
       mouseY <= bottom-140+20) {
     // overInf

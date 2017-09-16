@@ -522,6 +522,7 @@ function mousePressed() {
     }
   }
 
+  // lenguage
   if (lengSel == false) {
     if (mouseX >= windowWidth/2-150 && mouseX <= windowWidth/2-50 &&
     mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
@@ -562,10 +563,123 @@ function mousePressed() {
       }
     }
   }
+
+  // numbers-shape-instrument mouse selector
+  if (info && lengSel && screench) {
+    for (var i = 0; i < track.length; i++) {
+      if (mouseX >= windowWidth/2-350+(i*50)+xpos-20 &&
+          mouseX <= windowWidth/2-350+(i*50)+xpos+20 &&
+          mouseY >= bottom-235-20 && mouseY <= bottom-235+20) {
+        if (selection == i+1) {
+          selection = 0;
+        } else {
+          selection = i+1;
+        }
+      }
+    }
+  }
+
+
+  if (mouseX >= windowWidth/2-115+xpos-140 &&
+      mouseX <= windowWidth/2-115+xpos+140 &&
+      mouseY >= bottom-40-20 &&
+      mouseY <= bottom-40+20) {
+    //play toogle
+    tooglePlaying();
+  } else if (mouseX >= windowWidth/2-270+xpos-20 &&
+      mouseX <= windowWidth/2-270+xpos+20 &&
+      mouseY >= bottom-140-20 &&
+      mouseY <= bottom-140+20) {
+    // solo
+    if (shapes[selection-1].solo == false) {
+      for (var i = 0; i < shapes.length; i++) {
+          shapes[i].solo = false;
+          shapes[i].muted = true;
+          shapes[i].redval = 50;
+          shapes[i].grenval = 50;
+          shapes[i].blueval = 50;
+      }
+      shapes[selection-1].solo = true;
+      shapes[selection-1].muted = false;
+      shapes[selection-1].redval = shapes[selection-1].redvalon;
+      shapes[selection-1].grenval = shapes[selection-1].grenvalon;
+      shapes[selection-1].blueval = shapes[selection-1].bluevalon;
+    } else if (shapes[selection-1].solo == true) {
+      for (var i = 0; i < shapes.length; i++) {
+          shapes[i].muted = false;
+          shapes[i].redval = shapes[i].redvalon;
+          shapes[i].grenval = shapes[i].grenvalon;
+          shapes[i].blueval = shapes[i].bluevalon;
+      }
+      shapes[selection-1].solo = false;
+    }
+  } else if (mouseX >= windowWidth/2+xpos-20 &&
+      mouseX <= windowWidth/2+xpos+20 &&
+      mouseY >= bottom-90-20 &&
+      mouseY <= bottom-90+20) {
+    // mute
+    if (shapes[selection-1].muted == false) {
+      shapes[selection-1].muted = true;
+      shapes[selection-1].redval = 50;
+      shapes[selection-1].grenval = 50;
+      shapes[selection-1].blueval = 50;
+    } else if (shapes[selection-1].muted == true) {
+      shapes[selection-1].muted = false;
+      shapes[selection-1].redval = shapes[selection-1].redvalon;
+      shapes[selection-1].grenval = shapes[selection-1].grenvalon;
+      shapes[selection-1].blueval = shapes[selection-1].bluevalon;
+    }
+  } else if (mouseX >= windowWidth/2-240+xpos-20 &&
+      mouseX <= windowWidth/2-240+xpos+20 &&
+      mouseY >= bottom-190-20 &&
+      mouseY <= bottom-190+20) {
+    // Eq
+    if (shapes[selection-1].eq == false) {
+      track[selection-1].disconnect();
+      track[selection-1].connect(filter[selection-1]);
+      amp[selection-1].setInput(filter[selection-1])
+      shapes[selection-1].eq = true;
+    } else if (shapes[selection-1].eq == true) {
+      track[selection-1].disconnect();
+      track[selection-1].connect();
+      amp[selection-1].setInput(track[selection-1])
+      shapes[selection-1].eq = false;
+    }
+  } else if (mouseX >= windowWidth/2-190+xpos-20 &&
+      mouseX <= windowWidth/2-190+xpos+20 &&
+      mouseY >= bottom-190-20 &&
+      mouseY <= bottom-190+20) {
+    // overReset
+    reset();
+  } else if (mouseX >= windowWidth/2+20+xpos-20 &&
+      mouseX <= windowWidth/2+20+xpos+20 &&
+      mouseY >= bottom-190-20 &&
+      mouseY <= bottom-190+20) {
+    // info
+    if (info == true) {
+      info = false;
+    } else {
+      info = true;
+    }
+  } else if (mouseX >= windowWidth/2-180+xpos-20 &&
+      mouseX <= windowWidth/2-180+xpos+20 &&
+      mouseY >= bottom-140-20 &&
+      mouseY <= bottom-140+20) {
+    // overInf
+    if (fullscreen(false)) {
+      fullscreen(true);
+    } else if (fullscreen(true)) {
+      fullscreen(false);
+    }
+  }
 }
 
 function mouseWheel(event) {
-  wheel = -event.delta;
+  if (nav == 'ff') {
+    wheel = -event.delta;
+  } else {
+    wheel = -event.delta/33*2;
+  }
 }
 
 function keyPressed() {
@@ -596,6 +710,7 @@ function keyPressed() {
     }
   }
 
+  // eq
   if (selection != 0) {
     if (key == 'e' || key == 'E') {
       if (shapes[selection-1].eq == false) {
