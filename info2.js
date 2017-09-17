@@ -619,12 +619,12 @@ function information() {
       mouseY <= bottom-190+20) {
     // overReset
     rpi = infoData[lenguage].reset
-  } else if (mouseX >= windowWidth/2+20+xpos-20 &&
-      mouseX <= windowWidth/2+20+xpos+20 &&
+  } else if (mouseX >= windowWidth/2-240+xpos-20 &&
+      mouseX <= windowWidth/2-240+xpos+20 &&
       mouseY >= bottom-190-20 &&
       mouseY <= bottom-190+20) {
-    // overInf
-    rpi = infoData[lenguage].info
+    // over Eq
+    rpi = infoData[lenguage].eq
   } else if (mouseX >= windowWidth/2+20+xpos-20 &&
       mouseX <= windowWidth/2+20+xpos+20 &&
       mouseY >= bottom-190-20 &&

@@ -9,6 +9,7 @@ var selection = 0;
 var anyOver = 0;
 // tracks
 var track = [];
+var inter;
 var loadcomp = 0;
 var lateralshad = 255;
 var endTime = 205;
@@ -36,7 +37,7 @@ var loadshade;
 var overI = false;
 var overL = false
 var wheel = 0;
-var masterpos = 0;
+var masterpos = [false, 0, 1];
 
 //fullscreen choose
 var screench = false;
@@ -56,10 +57,7 @@ var snows = [];
 function preload() {
   juraBook = loadFont('data/Jura-Book.ttf');
   metadata = loadStrings('data/metadata.json');
-  // metadata: versions
-  // for (var i = 0; i < numShapes; i++) {
-  //   waveimg[i] = loadImage("data/waveShapes/Module0" + (i+1) + "_00_1.png");
-  // }
+  // inter = loadSound();
 }
 
 function setup() {
@@ -70,8 +68,8 @@ function setup() {
   lside = 5;
   rside = windowWidth - 5;
   mouseX = windowWidth/2;
-  mouseY = windowHeight/2;
-  masterpos = windowHeight/2;
+  mouseY = windowWidth/2;
+  masterpos[1] = windowWidth/2+100;
 
  // navigator
  //Check if browser is IE
@@ -581,97 +579,99 @@ function mousePressed() {
     }
   }
 
-
-  if (mouseX >= windowWidth/2-115+xpos-140 &&
-      mouseX <= windowWidth/2-115+xpos+140 &&
-      mouseY >= bottom-40-20 &&
-      mouseY <= bottom-40+20) {
-    //play toogle
-    tooglePlaying();
-  } else if (mouseX >= windowWidth/2-270+xpos-20 &&
-      mouseX <= windowWidth/2-270+xpos+20 &&
-      mouseY >= bottom-140-20 &&
-      mouseY <= bottom-140+20) {
-    // solo
-    if (shapes[selection-1].solo == false) {
-      for (var i = 0; i < shapes.length; i++) {
-          shapes[i].solo = false;
-          shapes[i].muted = true;
-          shapes[i].redval = 50;
-          shapes[i].grenval = 50;
-          shapes[i].blueval = 50;
+  // info buttons
+  if (info) {
+    if (mouseX >= windowWidth/2-115+xpos-140 &&
+        mouseX <= windowWidth/2-115+xpos+140 &&
+        mouseY >= bottom-40-20 &&
+        mouseY <= bottom-40+20) {
+      //play toogle
+      tooglePlaying();
+    } else if (mouseX >= windowWidth/2-270+xpos-20 &&
+        mouseX <= windowWidth/2-270+xpos+20 &&
+        mouseY >= bottom-140-20 &&
+        mouseY <= bottom-140+20) {
+      // solo
+      if (shapes[selection-1].solo == false) {
+        for (var i = 0; i < shapes.length; i++) {
+            shapes[i].solo = false;
+            shapes[i].muted = true;
+            shapes[i].redval = 50;
+            shapes[i].grenval = 50;
+            shapes[i].blueval = 50;
+        }
+        shapes[selection-1].solo = true;
+        shapes[selection-1].muted = false;
+        shapes[selection-1].redval = shapes[selection-1].redvalon;
+        shapes[selection-1].grenval = shapes[selection-1].grenvalon;
+        shapes[selection-1].blueval = shapes[selection-1].bluevalon;
+      } else if (shapes[selection-1].solo == true) {
+        for (var i = 0; i < shapes.length; i++) {
+            shapes[i].muted = false;
+            shapes[i].redval = shapes[i].redvalon;
+            shapes[i].grenval = shapes[i].grenvalon;
+            shapes[i].blueval = shapes[i].bluevalon;
+        }
+        shapes[selection-1].solo = false;
       }
-      shapes[selection-1].solo = true;
-      shapes[selection-1].muted = false;
-      shapes[selection-1].redval = shapes[selection-1].redvalon;
-      shapes[selection-1].grenval = shapes[selection-1].grenvalon;
-      shapes[selection-1].blueval = shapes[selection-1].bluevalon;
-    } else if (shapes[selection-1].solo == true) {
-      for (var i = 0; i < shapes.length; i++) {
-          shapes[i].muted = false;
-          shapes[i].redval = shapes[i].redvalon;
-          shapes[i].grenval = shapes[i].grenvalon;
-          shapes[i].blueval = shapes[i].bluevalon;
+    } else if (mouseX >= windowWidth/2+xpos-20 &&
+        mouseX <= windowWidth/2+xpos+20 &&
+        mouseY >= bottom-90-20 &&
+        mouseY <= bottom-90+20) {
+      // mute
+      if (shapes[selection-1].muted == false) {
+        shapes[selection-1].muted = true;
+        shapes[selection-1].redval = 50;
+        shapes[selection-1].grenval = 50;
+        shapes[selection-1].blueval = 50;
+      } else if (shapes[selection-1].muted == true) {
+        shapes[selection-1].muted = false;
+        shapes[selection-1].redval = shapes[selection-1].redvalon;
+        shapes[selection-1].grenval = shapes[selection-1].grenvalon;
+        shapes[selection-1].blueval = shapes[selection-1].bluevalon;
       }
-      shapes[selection-1].solo = false;
-    }
-  } else if (mouseX >= windowWidth/2+xpos-20 &&
-      mouseX <= windowWidth/2+xpos+20 &&
-      mouseY >= bottom-90-20 &&
-      mouseY <= bottom-90+20) {
-    // mute
-    if (shapes[selection-1].muted == false) {
-      shapes[selection-1].muted = true;
-      shapes[selection-1].redval = 50;
-      shapes[selection-1].grenval = 50;
-      shapes[selection-1].blueval = 50;
-    } else if (shapes[selection-1].muted == true) {
-      shapes[selection-1].muted = false;
-      shapes[selection-1].redval = shapes[selection-1].redvalon;
-      shapes[selection-1].grenval = shapes[selection-1].grenvalon;
-      shapes[selection-1].blueval = shapes[selection-1].bluevalon;
-    }
-  } else if (mouseX >= windowWidth/2-240+xpos-20 &&
-      mouseX <= windowWidth/2-240+xpos+20 &&
-      mouseY >= bottom-190-20 &&
-      mouseY <= bottom-190+20) {
-    // Eq
-    if (shapes[selection-1].eq == false) {
-      track[selection-1].disconnect();
-      track[selection-1].connect(filter[selection-1]);
-      amp[selection-1].setInput(filter[selection-1])
-      shapes[selection-1].eq = true;
-    } else if (shapes[selection-1].eq == true) {
-      track[selection-1].disconnect();
-      track[selection-1].connect();
-      amp[selection-1].setInput(track[selection-1])
-      shapes[selection-1].eq = false;
-    }
-  } else if (mouseX >= windowWidth/2-190+xpos-20 &&
-      mouseX <= windowWidth/2-190+xpos+20 &&
-      mouseY >= bottom-190-20 &&
-      mouseY <= bottom-190+20) {
-    // overReset
-    reset();
-  } else if (mouseX >= windowWidth/2+20+xpos-20 &&
-      mouseX <= windowWidth/2+20+xpos+20 &&
-      mouseY >= bottom-190-20 &&
-      mouseY <= bottom-190+20) {
-    // info
-    if (info == true) {
-      info = false;
-    } else {
-      info = true;
-    }
-  } else if (mouseX >= windowWidth/2-180+xpos-20 &&
-      mouseX <= windowWidth/2-180+xpos+20 &&
-      mouseY >= bottom-140-20 &&
-      mouseY <= bottom-140+20) {
-    // overInf
-    if (fullscreen(false)) {
-      fullscreen(true);
-    } else if (fullscreen(true)) {
-      fullscreen(false);
+    } else if (mouseX >= windowWidth/2-240+xpos-20 &&
+        mouseX <= windowWidth/2-240+xpos+20 &&
+        mouseY >= bottom-190-20 &&
+        mouseY <= bottom-190+20) {
+      // Eq
+      if (shapes[selection-1].eq == false) {
+        track[selection-1].disconnect();
+        track[selection-1].connect(filter[selection-1]);
+        amp[selection-1].setInput(filter[selection-1])
+        shapes[selection-1].eq = true;
+      } else if (shapes[selection-1].eq == true) {
+        track[selection-1].disconnect();
+        track[selection-1].connect();
+        amp[selection-1].setInput(track[selection-1])
+        shapes[selection-1].eq = false;
+      }
+    } else if (mouseX >= windowWidth/2-190+xpos-20 &&
+        mouseX <= windowWidth/2-190+xpos+20 &&
+        mouseY >= bottom-190-20 &&
+        mouseY <= bottom-190+20) {
+      // overReset
+      reset();
+    } else if (mouseX >= windowWidth/2+20+xpos-20 &&
+        mouseX <= windowWidth/2+20+xpos+20 &&
+        mouseY >= bottom-190-20 &&
+        mouseY <= bottom-190+20) {
+      // info
+      if (info == true) {
+        info = false;
+      } else {
+        info = true;
+      }
+    } else if (mouseX >= windowWidth/2-180+xpos-20 &&
+        mouseX <= windowWidth/2-180+xpos+20 &&
+        mouseY >= bottom-140-20 &&
+        mouseY <= bottom-140+20) {
+      // overInf
+      if (fullscreen(false)) {
+        fullscreen(true);
+      } else if (fullscreen(true)) {
+        fullscreen(false);
+      }
     }
   }
 }
@@ -788,12 +788,12 @@ function keyPressed() {
 
   // stop
   if (keyCode == ENTER) {
+    selection = 0;
     for (var i = 0; i < track.length; i++) {
       track[i].pause();
       track[i].stop();
       playing = false;
       bossfader = 255;
-      selection = 0;
     }
     resetNodesTrigger();
   }
@@ -862,6 +862,7 @@ function resetNodesTrigger() {
     track[i].resetNodes();
     console.log('reseted');
   }
+  // selection = 0;
 }
 
 function panels() {
@@ -911,6 +912,9 @@ function panels() {
   // rectMode(CORNER);
   textAlign(CENTER, CENTER);
   textSize(17);
+  if (!info) {
+    rpi = infoData[lenguage].info
+  }
   text(rpi, rside+20, topy+10, 170, bottom-10);
   stroke(200, 100, 0, 150);
 
@@ -928,14 +932,6 @@ function panels() {
       lside = 5
     }
   }
-  stroke(200, 100, 0, 150);
-  fill(0);
-  rectMode(CENTER, CENTER);
-  rect(lside-30, windowHeight/2, 6, 400, 3, 3, 3, 3);
-  fill(70, 30, 0)
-  rect(lside-30, masterpos, 20, 10, 3, 3, 3, 3)
-  rectMode(CORNER);
-  fill(0);
 
   // panel slide: bottom
   if (botlock == false) {
@@ -958,9 +954,9 @@ function panels() {
 
   // panel slide: top
   if (botlock == false) {
-    if ((mouseY < topy) && (mouseIsPressed == false || topy >= 135)) {
-      if (topy >= 135) {
-        topy = 135
+    if (((mouseY < topy) && (mouseIsPressed == false || topy >= 60) || masterpos[0])) {
+      if (topy >= 60) {
+        topy = 60
       } else {
         topy += 7;
       }
@@ -972,7 +968,50 @@ function panels() {
       }
     }
   } else {
-    topy = 135;
+    topy = 60;
+  }
+
+  // master control
+  stroke(200, 100, 0, 150);
+  rectMode(CENTER, CENTER);
+  fill(0);
+  rect(windowWidth/2, topy-30, 400, 6, 3, 3, 3, 3);
+  fill(200, 50, 0, 150);
+  noStroke();
+  rect(windowWidth/2+150, topy-30, 100, 6, 0, 3, 3, 0);
+  stroke(200, 100, 0, 150);
+  fill(0);
+  rect(windowWidth/2+230, topy-30, 40, 20, 3, 3, 3, 3)
+  fill(70, 30, 0);
+  rect(masterpos[1], topy-30, 10, 20, 3, 3, 3, 3);
+  rectMode(CORNER);
+  fill(0);
+  if (((mouseX >= windowWidth/2-200 && mouseX <= windowWidth/2+200 &&
+  mouseY >= topy-30-8 && mouseY <= topy-30+8) && mouseIsPressed) || masterpos[0]){
+    masterpos[1] = mouseX;
+    masterpos[0] = true;
+  }
+  if (!mouseIsPressed) {
+    masterpos[0] = false;
+  }
+  if (masterpos[1] <= windowWidth/2-200) {
+    masterpos[1] = windowWidth/2-200;
+  } else if (masterpos[1] >= windowWidth/2+200) {
+    masterpos[1] = windowWidth/2+200;
+  }
+  if (masterpos[0]) {
+    selection = 0;
+  }
+  noStroke()
+  fill(200, 100, 0, 150);
+  if (masterpos[1] < windowWidth/2+100) {
+    masterpos[2] = (map(masterpos[1], windowWidth/2-200, windowWidth/2+100, 0, 1)*100).toFixed(0);
+  } else {
+    masterpos[2] = (map(masterpos[1], windowWidth/2+100, windowWidth/2+200, 1, 2)*100).toFixed(0);
+  }
+  text(masterpos[2], windowWidth/2+230, topy-30);
+  if (loadcomp == track.length) {
+    masterVolume(masterpos[2]/100);
   }
 
 }

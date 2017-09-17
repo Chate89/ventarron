@@ -108,6 +108,8 @@ function Shape() {
       curveVertex (this.centX, this.centY);
     }
     endShape();
+
+    // data
     if (this.selection == selection-1) {
       textAlign(CENTER);
       textSize(15);
@@ -121,7 +123,6 @@ function Shape() {
       }
       text('freq: '+floor(this.freq), this.x, this.y+20);
     }
-
 
     if (this.size <= 0) {
       this.size = 0;
@@ -209,16 +210,16 @@ function Shape() {
 
   // boundries
   this.sides = function() {
-    if (this.y < 20) {
+    if (this.y <= 20) {
       this.y = 20;
     }
-    if (this.y > windowHeight-20) {
+    if (this.y >= windowHeight-20) {
       this.y = windowHeight-20;
     }
-    if (this.x < 20) {
+    if (this.x <= 20) {
       this.x = 20;
     }
-    if (this.x > windowWidth-20) {
+    if (this.x >= windowWidth-20) {
       this.x = windowWidth-20;
     }
   }
