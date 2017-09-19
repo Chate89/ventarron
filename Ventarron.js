@@ -32,7 +32,8 @@ var hl;
 var playing = false;
 var info = false;
 var mainCol = 0;
-var botlock = false;
+var botLockTop = false;
+var botLockBottom = false;
 var loadshade;
 var overI = false;
 var overL = false
@@ -674,6 +675,10 @@ function mousePressed() {
       }
     }
   }
+  if (mouseX >= windowWidth-35-10 && mouseX <= windowWidth-35+10 &&
+  mouseY >= topy-30-10 && mouseY <= topy-30+10) {
+    botLockTop = !botLockTop
+  }
 }
 
 function mouseWheel(event) {
@@ -860,7 +865,7 @@ function tooglePlaying() {
 function resetNodesTrigger() {
   for (var i = 0; i < track.length; i++) {
     track[i].resetNodes();
-    console.log('reseted');
+    // console.log('reseted');
   }
   // selection = 0;
 }
@@ -934,7 +939,7 @@ function panels() {
   }
 
   // panel slide: bottom
-  if (botlock == false) {
+  if (botLockBottom == false) {
     if ((mouseY > bottom || info == true) && (mouseIsPressed == false || bottom <= windowHeight-50)) {
       if (bottom <= windowHeight-50) {
         bottom = windowHeight-50
@@ -953,7 +958,7 @@ function panels() {
   }
 
   // panel slide: top
-  if (botlock == false) {
+  if (botLockTop == false) {
     if (((mouseY < topy) && (mouseIsPressed == false || topy >= 60) || masterpos[0])) {
       if (topy >= 60) {
         topy = 60
@@ -981,13 +986,13 @@ function panels() {
   rect(windowWidth/2+150, topy-30, 100, 6, 0, 3, 3, 0);
   stroke(200, 100, 0, 150);
   fill(0);
-  rect(windowWidth/2+230, topy-30, 40, 20, 3, 3, 3, 3)
+  rect(windowWidth/2+230, topy-30, 40, 20, 3, 3, 3, 3);
   fill(70, 30, 0);
   rect(masterpos[1], topy-30, 10, 20, 3, 3, 3, 3);
   rectMode(CORNER);
   fill(0);
   if (((mouseX >= windowWidth/2-200 && mouseX <= windowWidth/2+200 &&
-  mouseY >= topy-30-8 && mouseY <= topy-30+8) && mouseIsPressed) || masterpos[0]){
+  mouseY >= topy-30-12 && mouseY <= topy-30+12) && mouseIsPressed) || masterpos[0]){
     masterpos[1] = mouseX;
     masterpos[0] = true;
   }
@@ -1013,6 +1018,27 @@ function panels() {
   if (loadcomp == track.length) {
     masterVolume(masterpos[2]/100);
   }
+  // botLockTop
+  rectMode(CENTER, CENTER);
+  if (mouseX >= windowWidth-35-10 && mouseX <= windowWidth-35+10 &&
+  mouseY >= topy-30-10 && mouseY <= topy-30+10) {
+    fill(200, 100, 0);
+  } else {
+    fill(100, 50, 0);
+  }
+  rect(windowWidth-35, topy-30, 16, 16, 3, 3, 3, 3);
+  strokeWeight(2);
+  stroke(0)
+  if (botLockTop) {
+    arc(windowWidth-35, topy-32, 6, 6, PI, TWO_PI);
+  } else {
+    arc(windowWidth-35, topy-32, 6, 6, PI, TWO_PI-QUARTER_PI);
+  }
+  noFill()
+  rect(windowWidth-35, topy-28, 8, 6, 0, 0, 1, 1);
+  strokeWeight(1);
+  rectMode(CORNER);
+
 
 }
 

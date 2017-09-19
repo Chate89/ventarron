@@ -91,7 +91,6 @@ function Shape() {
     } else if (this.playing == false) {
       this.rotvel = this.rotvelon/divi;
     }
-
     this.rotation += this.rotvel*(this.rotdir/abs(this.rotdir));
     beginShape();
     if (this.ss == false) {
@@ -253,10 +252,9 @@ function Shape() {
     track[this.selection].pan(this.pan);
   }
 
-
   // mouse interaction
   this.mouseinteraction = function () {
-    if (mouseIsPressed) {
+    if (mouseIsPressed && !info) {
       if (this.selection == selection-1) {
         if (mouseX < this.x) {
           this.x = mouseX + (this.x - pmouseX);

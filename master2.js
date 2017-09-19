@@ -1,10 +1,14 @@
 function master() {
   // when finish
   if (track[0].currentTime() > endTime) {
-  for (var i = 0; i < track.length; i++) {
-      track[i].stop();
-      playing = false;
-      bossfader = 255;
+    for (var i = 0; i < track.length; i++) {
+      track[i].pause();
+      // track[i].pauseTime = 0;
+    }
+    playing = false;
+    bossfader = 255;
+    for (var i = 0; i < track.length; i++) {
+      track[i].pauseTime = 0;
     }
     resetNodesTrigger();
   }
