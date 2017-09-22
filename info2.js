@@ -99,7 +99,7 @@ function information() {
   }
 
   if (loadcomp < numShapes) {
-    bossfader = 255;
+    bossfader = 100;
   } else {
     if (bossfader <= shad) {
       bossfader = shad
@@ -109,70 +109,72 @@ function information() {
   }
 
   // controls
-  fill(0);
+  fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   rectMode(CENTER);
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
 
   // mouse
 
   //spacebar
   if (playing == true) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill (0)
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
   rect(windowWidth/2-115+xpos, bottom-40, 270, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   textSize(14);
   text(infoData[lenguage].spacebarBar, windowWidth/2-115+xpos, bottom-35);
   noFill();
 
   // arrows
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   if (keyIsDown(LEFT_ARROW)) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
   rect(windowWidth/2+200+xpos, bottom-40, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("L", windowWidth/2+188+xpos, bottom-30);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
+
 
   if (keyIsDown(DOWN_ARROW)) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
   rect(windowWidth/2+250+xpos, bottom-40, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("Down", windowWidth/2+250+xpos, bottom-30);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
+
 
   if (keyIsDown(RIGHT_ARROW)) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
   rect(windowWidth/2+300+xpos, bottom-40, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("R", windowWidth/2+288+xpos, bottom-30);
   noFill();
-  stroke(200, 100, 0, 150);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
 
   if (keyIsDown(UP_ARROW)) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
   rect(windowWidth/2+250+xpos, bottom-90, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("Up", windowWidth/2+250+xpos, bottom-80);
   noFill();
@@ -188,11 +190,11 @@ function information() {
         stroke(80, 80, 80);
       }
     } else {
-      stroke(200, 100, 0, stroSatI);
+      stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
       if (selection-1 == i) {
-        fill(70, 30, 0, 255);
+        fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
       } else {
-        fill(0);
+        fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
       }
     }
     rect(windowWidth/2-350+(i*50)+xpos, bottom-235, 40, 40, 5);
@@ -205,7 +207,7 @@ function information() {
         fill(80, 80, 80);
       }
     } else {
-      fill(200, 100, 0, 200);
+      fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
     }
 
     if (i < shapes.length-1) {
@@ -214,70 +216,70 @@ function information() {
       text(0, windowWidth/2-360+(i*50)+xpos, bottom-225);
     }
     noFill();
-    stroke(200, 100, 0, stroSatI);
+    stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   }
 
   // number volume
   for (var i = 0; i < shapes.length; i++) {
-    stroke(200, 100, 0, stroSatI);
-    fill(0);
+    stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
+    fill(colours[colsel].inforoff/3, colours[colsel].infogoff/3, colours[colsel].infoboff/3);
     rect(windowWidth/2-350+(i*50)+xpos, bottom-260, 40, 10, 5);
     fill(shapes[i].redvalon, shapes[i].grenvalon, shapes[i].bluevalon)
     noStroke();
-    rect(windowWidth/2-350+(i*50)+xpos, bottom-260, shapes[i].amp/20, 9);
-    fill(0);
+    rect(windowWidth/2-350+(i*50)+xpos, bottom-259.5, shapes[i].amp/20, 8);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
 
   // ctrl and shift (size)
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   if (keyIsDown(SHIFT)) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
   rect(windowWidth/2-330+xpos, bottom-90, 80, 40, 5);
   rect(windowWidth/2+100+xpos, bottom-90, 80, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("Shift", windowWidth/2-353+xpos, bottom-80);
   text("Shift", windowWidth/2+77+xpos, bottom-80);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
 
   if (keyIsDown(CONTROL)) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
   rect(windowWidth/2-350+xpos, bottom-40, 40, 40, 5);
   rect(windowWidth/2+120+xpos, bottom-40, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("Ctrl", windowWidth/2-357+xpos, bottom-30);
   text("Ctrl", windowWidth/2+113+xpos, bottom-30);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
 
   // solo
-  fill(0);
+  fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   if (selection != 0) {
     for (var i = 0; i < shapes.length; i++) {
       if (shapes[selection-1].solo == true) {
-        fill(70, 30, 0, 255);
+        fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
       } else {
-        fill(0);
+        fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
       }
     }
   }
   rect(windowWidth/2-270+xpos, bottom-140, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("S", windowWidth/2-280+xpos, bottom-130);
   noStroke();
   for (var i = 0; i < shapes.length; i++) {
     if (shapes[i].solo) {
-      fill(200, 100, 0, 200);
-      stroke(200, 100, 0, 200);
+      fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
+      stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
     } else {
       noFill();
       noStroke()
@@ -287,19 +289,19 @@ function information() {
   }
 
   // mute
-  fill(0);
+  fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   if (selection != 0) {
     for (var i = 0; i < shapes.length; i++) {
       if (shapes[selection-1].muted == true) {
-        fill(70, 30, 0, 255);
+        fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
       } else {
-        fill(0);
+        fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
       }
     }
   }
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   rect(windowWidth/2+xpos, bottom-90, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("M", windowWidth/2-10+xpos, bottom-80);
   noFill();
@@ -318,27 +320,27 @@ function information() {
   }
 
   // info
-  fill(70, 30, 0, 255);
-  stroke(200, 100, 0, stroSatI);
+  fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   rect(windowWidth/2+20+xpos, bottom-190, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("I", windowWidth/2+30+xpos, bottom-180);
 
   // eq
-  fill(0);
+  fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   if (selection != 0) {
     for (var i = 0; i < shapes.length; i++) {
       if (shapes[selection-1].eq == true) {
-        fill(70, 30, 0, 255);
+        fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
       } else {
-        fill(0);
+        fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
       }
     }
   }
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   rect(windowWidth/2-240+xpos, bottom-190, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("E", windowWidth/2-250+xpos, bottom-180);
   noFill();
@@ -351,41 +353,41 @@ function information() {
           fill(80, 80, 80);
         }
       } else {
-        fill(200, 100, 0, 200);
+        fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
       }
       text('Eq', windowWidth/2-340+(i*50)+xpos, bottom-225);
     }
   }
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
 
   // fullscreen
   noFill();
   if (fullscreen()) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   rect(windowWidth/2-180+xpos, bottom-140, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("F", windowWidth/2-190+xpos, bottom-130);
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
 
   // reset metadata
   noFill();
   if (keyIsPressed == true && key == 'r') {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].inforon, colours[colsel].infogon, colours[colsel].infobon);
   } else {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   }
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   rect(windowWidth/2-190+xpos, bottom-190, 40, 40, 5);
-  fill(200, 100, 0, 200);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   noStroke();
   text("R", windowWidth/2-200+xpos, bottom-180);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
 
 
 
@@ -399,10 +401,10 @@ function information() {
     zomrel = 0.25
   }
   xinfo = (rside+lside)/2;
-  // xinfo = 2*(rside+lside)/3;
+
 
   // main box
-  fill(0, 200);
+  fill(colours[colsel].inforoff/3, colours[colsel].inforoff/3, colours[colsel].inforoff/3, 150);
   rectMode(CENTER);
   if (windowHeight > 680) {
     rect(xinfo+200, yinfo, 400, 350, 10, 10, 10, 10)
@@ -411,7 +413,7 @@ function information() {
   }
 
   // EQ box
-  fill(0, 200);
+  fill(colours[colsel].inforoff/3, colours[colsel].inforoff/3, colours[colsel].inforoff/3);
   rectMode(CENTER);
   if (windowHeight > 680) {
     rect(xinfo-253, yinfo, 200, 280, 10, 10, 10, 10)
@@ -420,17 +422,27 @@ function information() {
   }
 
   for (var i = 0; i < shapes.length; i++) {
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
     ellipse(xinfo-253-100, map(shapes[i].y, windowHeight-20, 20, yinfo+130, yinfo-130), 15, 15);
   }
 
   if (selection != 0 && loadcomp == numShapes) {
+    fill(0, colours[colsel].eqbars*20);
+    rect(xinfo-253-140-5, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+125, yinfo-135)+5, 60, 30, 3, 3, 3, 3);
     fill(shapes[selection-1].redvalon, shapes[selection-1].grenvalon, shapes[selection-1].bluevalon);
     noStroke();
     ellipse(xinfo-253-100, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+130, yinfo-130), 15, 15);
-    text(int(shapes[selection-1].freq)+' Hz', xinfo-253-140, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+125, yinfo-135)+5);
+    text(int(shapes[selection-1].freq)+' Hz', xinfo-253-140-5, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+125, yinfo-135)+5);
     fill(0);
     text(int(shapes[selection-1].selection+1), xinfo-253-101, map(shapes[selection-1].y, windowHeight-20, 20, yinfo+125, yinfo-135)+4);
+  }
+
+  // eq info change
+  if (mouseIsPressed && selection != 0) {
+    if (mouseX >= xinfo-253-140-5-30 && mouseX <= xinfo-253-140-5+30 &&
+      mouseY >= yinfo-145 && mouseY <= yinfo+145) {
+      shapes[selection-1].y = map(mouseY, yinfo-140, yinfo+140, topy, bottom)+20;
+    }
   }
 
   // eq bars
@@ -441,7 +453,7 @@ function information() {
   }
   if (selection != 0 && loadcomp == numShapes) {
     for (var j = 0; j < numShapes; j++) {
-      fill(20, 20, 20);
+      fill(colours[colsel].eqbars);
       for (var i = 0; i < octavespect[j].length; i++){
         var y = map(i, 0, octavespect[j].length, yinfo+130, yinfo-150);
         var w = -85 + map(octavespect[j][i], 0, 255, 85, 5);
@@ -482,9 +494,9 @@ function information() {
 
 
   rectMode(CENTER);
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   // channel volume
-  fill(0, 200);
+  fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
   if (windowHeight > 680) {
     rect(xinfo-220+200, yinfo, 15, 350, 5, 5, 5, 5);
     rect(xinfo+220+200, yinfo, 15, 350, 5, 5, 5, 5);
@@ -494,7 +506,8 @@ function information() {
   }
 
   rectMode(CORNERS);
-  fill(200, 100, 0);
+  noStroke()
+  fill(colours[colsel].inforon*1.5, colours[colsel].infogon*1.5, colours[colsel].infobon*1.5);
 
   if (selection != 0 && loadcomp == numShapes) {
     if (windowHeight > 680) {
@@ -522,7 +535,7 @@ function information() {
     stroke(shapes[selection-1].redval, shapes[selection-1].grenval, shapes[selection-1].blueval);
 
     // background
-    fill(0);
+    fill(colours[colsel].inforoff, colours[colsel].infogoff, colours[colsel].infoboff);
     beginShape();
     for (var i = 0; i < PI*4; i += PI/(shapes[selection-1].nodes/2)) {
       xinfo2 = xinfo+200 + (shapes[selection-1].amp/5+shapes[selection-1].size*zomrel)*sin(i+shapes[selection-1].rotation)/2;
@@ -543,6 +556,7 @@ function information() {
     }
     endShape();
   }
+
 
   // right panel information (mouseover)
   if (mouseX >= windowWidth/2-115+xpos-140 &&

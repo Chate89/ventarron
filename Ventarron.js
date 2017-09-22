@@ -1,7 +1,7 @@
 // internal canvas
 var topy, bottom, lside, rside;
 var bossfader = 255;
-var shad = 200;
+var shad = 100;
 // shapes
 var numShapes = 10;
 var shapes = [];
@@ -11,7 +11,6 @@ var anyOver = 0;
 var track = [];
 var inter;
 var loadcomp = 0;
-var lateralshad = 255;
 var endTime = 205;
 var amp = [];
 var porcent = 0;
@@ -31,7 +30,6 @@ var hlc = 0;
 var hl;
 var playing = false;
 var info = false;
-var mainCol = 0;
 var botLockTop = false;
 var botLockBottom = false;
 var loadshade;
@@ -52,6 +50,72 @@ var lengSel = false;
 var rpi = '';
 var reseter = true;
 var porcentOK = 0;
+var colsel = 0;
+var colours = [
+  {
+    "maincol1": 0,
+    "maincol2": 0,
+    "maincol3": 0,
+    "red1": 200,
+    "green1": 100,
+    "blue1": 0,
+    "red2": 100,
+    "green2": 50,
+    "blue2": 0,
+    "red3": 70,
+    "green3": 30,
+    "blue3": 0,
+    "grey1": 50,
+    "grey2": 100,
+    "panels1": 0,
+    "panels2": 0,
+    "panels3": 0,
+    "sstart1": 200,
+    "fstart1": 100,
+    "inforon": 70,
+    "infogon": 30,
+    "infobon": 0,
+    "inforoff": 0,
+    "infogoff": 0,
+    "infoboff": 0,
+    "inforstr": 200 ,
+    "infogstr": 100,
+    "infobstr": 0,
+    "eqbars": 20,
+  },
+  {
+    "maincol1": 230,
+    "maincol2": 230,
+    "maincol3": 230,
+    "red1": 0,
+    "green1": 0,
+    "blue1": 0,
+    "red2": 20,
+    "green2": 20,
+    "blue2": 20,
+    "red3": 180,
+    "green3": 180,
+    "blue3": 180,
+    "grey1": 50,
+    "grey2": 100,
+    "panels1": 180,
+    "panels2": 180,
+    "panels3": 180,
+    "sstart1": 0,
+    "fstart1": 50,
+    "inforon": 150,
+    "infogon": 150,
+    "infobon": 150,
+    "inforoff": 100,
+    "infogoff": 100,
+    "infoboff": 100,
+    "inforstr": 10,
+    "infogstr": 10,
+    "infobstr": 10,
+    "eqbars": 10,
+  }
+];
+
 
 var snows = [];
 
@@ -197,14 +261,13 @@ function progress9(evt) {
 }
 
 function draw() {
-  background (mainCol);
+  background (colours[colsel].maincol1, colours[colsel].maincol2, colours[colsel].maincol3);
   noStroke();
-  // if (loadcomp == 6) {
-  // }
- porcentOK = shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
- shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
- shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
- shapes[0].loadedPorc
+
+  porcentOK = shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
+    shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
+    shapes[0].loadedPorc+shapes[0].loadedPorc+shapes[0].loadedPorc+
+    shapes[0].loadedPorc;
 
 
   // trigger nodeSources reseter
@@ -218,7 +281,6 @@ function draw() {
   for (var i = 0; i < shapes.length; i++) {
     ffts[i].analyze();
   }
-
   for (var i = 0; i < shapes.length; i++) {
     filter[i].freq(shapes[i].freq);
   }
@@ -241,19 +303,12 @@ function draw() {
   }
   wheel = 0;
 
-  // fft.analyze();
-  // for (var i = 0; i < ffts.length; i++) {
-  //   ffts[i].analyze();
-  // }
-
-
-
   // play trigger
   for (var i = 0; i < shapes.length; i++) {
     if (playing == false) {
-      shapes[i].redval = 50;
-      shapes[i].grenval = 50;
-      shapes[i].blueval = 50;
+      shapes[i].redval = colours[colsel].grey1;
+      shapes[i].grenval = colours[colsel].grey1;
+      shapes[i].blueval = colours[colsel].grey1;
       shapes[i].playing = false;
       divi = 3;
     } else if (playing == true && shapes[i].muted == false) {
@@ -327,18 +382,18 @@ function draw() {
 
   // info button
   if (info == true) {
-    fill(70, 30, 0, 255);
+    fill(colours[colsel].red3, colours[colsel].green3, colours[colsel].blue3, 255);
   } else {
-    fill(0, 200);
+    fill(colours[colsel].panels1);
   }
   if (overI == true) {
-    stroke(200, 100, 0, 255);
+    stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 255);
   } else {
-    stroke(200, 100, 0, 100);
+    stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 60);
   }
   rectMode(CENTER)
   rect(lside+30, topy+30, 30, 30, 5);
-  fill(200, 100, 0, 100);
+  fill(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1);
   noStroke();
   textSize(12);
   textFont('Arial');
@@ -346,20 +401,20 @@ function draw() {
   text("Info", lside+30, topy+30);
   textStyle(NORMAL);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, stroSatI);
   rectMode(CORNER);
   textFont(juraBook);
 
   // leng buttom
-    if (overL == true) {
-    stroke(200, 100, 0, 255);
+  if (overL == true) {
+    stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 255);
   } else {
-    stroke(200, 100, 0, 100);
+    stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 60);
   }
   rectMode(CENTER)
-  fill(0, 200);
+  fill(colours[colsel].panels1);
   rect(lside+45, bottom-30, 60, 30, 5);
-  fill(200, 100, 0, 100);
+  fill(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1);
   noStroke();
   textSize(12);
   textFont('Arial');
@@ -371,7 +426,7 @@ function draw() {
   }
   textStyle(NORMAL);
   noFill();
-  stroke(200, 100, 0, stroSatI);
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, stroSatI);
   rectMode(CORNER);
   textFont(juraBook);
 
@@ -391,7 +446,7 @@ function draw() {
     mainshade = 255;
   }
   noStroke();
-  fill(0, mainshade);
+  fill(colours[colsel].maincol1, colours[colsel].maincol2, colours[colsel].maincol3, mainshade);
   rect(0, 0, windowWidth, windowHeight);
 
   if (screench == false) {
@@ -406,27 +461,27 @@ function draw() {
 
   // screen choose
     rectMode(CENTER);
-    fill(200, 120, 0, scrchshade/2-45);
-    stroke(200, 100, 0, scrchshade);
+    fill(colours[colsel].fstart1, colours[colsel].fstart1, colours[colsel].fstart1, scrchshade/2-45);
+    stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, scrchshade);
     rect(windowWidth/2, windowHeight/2-20, 400, 130, 5, 5, 5, 5);
-    noFill();
+    // noFill();
     if (mouseX >= windowWidth/2-150 && mouseX <= windowWidth/2-50 &&
     mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
-      stroke(200, 100, 0, scrchshade*2);
+      stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, scrchshade*2);
     } else {
-      stroke(200, 100, 0, scrchshade);
+      stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, scrchshade);
     }
-    fill(200, 120, 0, scrchshade/2-45);
+    fill(colours[colsel].fstart1, colours[colsel].fstart1, colours[colsel].fstart1, scrchshade/2-45);
     rect(windowWidth/2-100, windowHeight/2, 100, 50, 5, 5, 5, 5);
 
     if (mouseX >= windowWidth/2+50 && mouseX <= windowWidth/2+150 &&
     mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
-      stroke(200, 100, 0, scrchshade*2);
+      stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, scrchshade*2);
     } else {
-      stroke(200, 100, 0, scrchshade);
+      stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, scrchshade);
     }
     rect(windowWidth/2+100, windowHeight/2, 100, 50, 5, 5, 5, 5);
-    fill(200, 100, 0, scrchshade);
+    fill(colours[colsel].fstart1, colours[colsel].fstart1, colours[colsel].fstart1, scrchshade);
     // stroke(200, 100, 0, scrchshade);
     noStroke();
     textSize(25);
@@ -438,30 +493,28 @@ function draw() {
     // lenguage selector
     if (lengSel == false) {
     rectMode(CENTER);
-    fill(0);
+    fill(colours[colsel].maincol1, colours[colsel].maincol2, colours[colsel].maincol3);
     rect(windowWidth/2, windowHeight/2-20, 410, 140, 5, 5, 5, 5);
-    fill(200, 120, 0, 120/2-45);
-    stroke(200, 100, 0, 120);
+    fill(colours[colsel].fstart1, colours[colsel].fstart1, colours[colsel].fstart1, 120/2-45);
+    stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, 120);
     rect(windowWidth/2, windowHeight/2-20, 400, 130, 5, 5, 5, 5);
     noFill();
     if (mouseX >= windowWidth/2-150 && mouseX <= windowWidth/2-50 &&
     mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
-      stroke(200, 100, 0, 120*2);
+      stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, 120*2);
     } else {
-      stroke(200, 100, 0, 120);
+      stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, 120);
     }
-    fill(200, 120, 0, 120/2-45);
+    fill(colours[colsel].fstart1, colours[colsel].fstart1, colours[colsel].fstart1, 120/2-45);
     rect(windowWidth/2-100, windowHeight/2, 100, 50, 5, 5, 5, 5);
-
     if (mouseX >= windowWidth/2+50 && mouseX <= windowWidth/2+150 &&
     mouseY >= windowHeight/2-25 && mouseY <= windowHeight/2+25) {
-      stroke(200, 100, 0, 120*2);
+      stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, 120*2);
     } else {
-      stroke(200, 100, 0, 120);
+      stroke(colours[colsel].sstart1, colours[colsel].sstart1, colours[colsel].sstart1, 120);
     }
-
     rect(windowWidth/2+100, windowHeight/2, 100, 50, 5, 5, 5, 5);
-    fill(200, 100, 0, 120);
+    fill(colours[colsel].fstart1, colours[colsel].fstart1, colours[colsel].fstart1, 120);
     // stroke(200, 100, 0, scrchshade);
     noStroke();
     textSize(25);
@@ -485,27 +538,27 @@ function draw() {
   }
   if (playing == false && info  == false) {
     noStroke();
-    fill(100, 50, 0, loadshade);
+    fill(colours[colsel].fstart1, colours[colsel].fstart1, colours[colsel].fstart1, loadshade);
     textSize(20);
     text(infoData[lenguage].loading, windowWidth/2, windowHeight/2+100);
     textSize(20);
     text("(" + loadcomp + " / " + track.length +")",  windowWidth/2, windowHeight/2+120);
-    fill(100, 150-loadshade);
-    fill(50, 255-loadshade);
+    fill(colours[colsel].grey1, 150-loadshade);
+    fill(colours[colsel].grey1, 255-loadshade);
     if (loadshade != 0) {
-      fill(0, loadshade);
-      stroke(200, 100, 0, loadshade);
-      rect(windowWidth/2, windowHeight/2+150, 300, 10, 5, 5, 5, 5);
-      rect(windowWidth/2, windowHeight/2+170, 300, 10, 5, 5, 5, 5);
       rectMode(CORNER)
-      fill(200, 100, 0, loadshade)
-      rect(windowWidth/2-150, windowHeight/2+150-5, 300*((porcentOK/10)).toFixed(3), 10, 5, 5, 5, 5);
-      rect(windowWidth/2-150, windowHeight/2+170-5, 300*(loadcomp/track.length), 10, 5, 5, 5, 5);
+      fill(colours[colsel].fstart1, colours[colsel].fstart1, colours[colsel].fstart1, loadshade);
+      if (porcentOK != 0) {
+        rect(windowWidth/2-150, windowHeight/2+150-5, 300*((porcentOK/10)).toFixed(3), 10, 5, 5, 5, 5);
+      }
+      if (loadcomp != 0) {
+        rect(windowWidth/2-150, windowHeight/2+170-5, 300*(loadcomp/track.length), 10, 5, 5, 5, 5);
+      }
       rectMode(CENTER);
     }
     noStroke();
-    fill(100, 150-loadshade);
-    fill(50, 255-loadshade);
+    fill(colours[colsel].grey1, 150-loadshade);
+    fill(colours[colsel].grey2, 255-loadshade);
     if (screench == true && loadcomp == track.length) {
       text(infoData[lenguage].spacebarBarPress, windowWidth/2, windowHeight/2+200);
     }
@@ -675,9 +728,13 @@ function mousePressed() {
       }
     }
   }
-  if (mouseX >= windowWidth-35-10 && mouseX <= windowWidth-35+10 &&
+  if (mouseX >= windowWidth/2+270-10 && mouseX <= windowWidth/2+270+10 &&
   mouseY >= topy-30-10 && mouseY <= topy-30+10) {
-    botLockTop = !botLockTop
+    botLockTop = !botLockTop;
+  }
+  if (mouseX >= lside+15-10 && mouseX <= lside+15+10 &&
+  mouseY >= bottom+25-10 && mouseY <= bottom+25+10) {
+    botLockBottom = !botLockBottom;
   }
 }
 
@@ -690,6 +747,10 @@ function mouseWheel(event) {
 }
 
 function keyPressed() {
+  if ((key == 'c' || key == 'C')) {
+    colsel = floor(random(0, colours.length))
+  }
+
   // info
   if ((key == 'i' || key == 'I' || keyCode == ESCAPE) && screench == true) {
     if (info == false) {
@@ -873,19 +934,13 @@ function resetNodesTrigger() {
 function panels() {
 
   //external canvas
-  fill(0);
+  fill(colours[colsel].panels1, colours[colsel].panels2, colours[colsel].panels3);
   noStroke();
   // top
   rect(0, 0, windowWidth, topy);
   // bottom
   rect(0, bottom, windowWidth, windowHeight);
 
-  if (lside > 10 || rside < windowWidth - 10) {
-    lateralshad = 220;
-  } else {
-    lateralshad = 255;
-  }
-  fill(0, lateralshad)
   // left
   rect(0, 0, lside, windowHeight);
   // right
@@ -893,7 +948,7 @@ function panels() {
 
   // panel perimeter
   noFill();
-  stroke(200, 100, 0, 150);
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
   rect(lside, topy, rside-lside, bottom-topy, 5);
 
   // panel slide: right
@@ -912,8 +967,9 @@ function panels() {
   }
 
   // right panel information
-  fill(200, 100, 0, 200);
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 200);
   noStroke();
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   // rectMode(CORNER);
   textAlign(CENTER, CENTER);
   textSize(17);
@@ -921,7 +977,7 @@ function panels() {
     rpi = infoData[lenguage].info
   }
   text(rpi, rside+20, topy+10, 170, bottom-10);
-  stroke(200, 100, 0, 150);
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
 
   // panel slide: left
   if ((mouseX < lside || info == true) && (mouseIsPressed == false || lside >= 200)) {
@@ -956,6 +1012,26 @@ function panels() {
   } else {
     bottom = windowHeight-50;
   }
+  rectMode(CENTER, CENTER);
+  noStroke()
+  if (mouseX >= lside+15-10 && mouseX <= lside+15+10 &&
+  mouseY >= bottom+25-10 && mouseY <= bottom+25+10) {
+    fill(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
+  } else {
+    fill(colours[colsel].red2, colours[colsel].green2, colours[colsel].blue2, 150);
+  }
+  rect(lside+15, bottom+25, 16, 16, 3, 3, 3, 3);
+  strokeWeight(2);
+  stroke(colours[colsel].maincol1, colours[colsel].maincol2, colours[colsel].maincol3)
+  if (botLockBottom) {
+    arc(lside+15, bottom+25-2, 6, 6, PI, TWO_PI);
+  } else {
+    arc(lside+15, bottom+25-2, 6, 6, PI, TWO_PI-QUARTER_PI);
+  }
+  noFill()
+  rect(lside+15, bottom+25+2, 8, 6, 0, 0, 1, 1);
+  strokeWeight(1);
+  rectMode(CORNER);
 
   // panel slide: top
   if (botLockTop == false) {
@@ -977,20 +1053,20 @@ function panels() {
   }
 
   // master control
-  stroke(200, 100, 0, 150);
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
   rectMode(CENTER, CENTER);
-  fill(0);
+  fill(colours[colsel].panels1-100, colours[colsel].panels2-100, colours[colsel].panels3-100,);
   rect(windowWidth/2, topy-30, 400, 6, 3, 3, 3, 3);
-  fill(200, 50, 0, 150);
+  fill(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
   noStroke();
   rect(windowWidth/2+150, topy-30, 100, 6, 0, 3, 3, 0);
-  stroke(200, 100, 0, 150);
-  fill(0);
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
+  fill(colours[colsel].panels1, colours[colsel].panels2, colours[colsel].panels3);
   rect(windowWidth/2+230, topy-30, 40, 20, 3, 3, 3, 3);
-  fill(70, 30, 0);
+  fill(colours[colsel].red3, colours[colsel].green3, colours[colsel].blue3);
   rect(masterpos[1], topy-30, 10, 20, 3, 3, 3, 3);
   rectMode(CORNER);
-  fill(0);
+  fill(colours[colsel].panels1, colours[colsel].panels2, colours[colsel].panels3);
   if (((mouseX >= windowWidth/2-200 && mouseX <= windowWidth/2+200 &&
   mouseY >= topy-30-12 && mouseY <= topy-30+12) && mouseIsPressed) || masterpos[0]){
     masterpos[1] = mouseX;
@@ -1008,7 +1084,7 @@ function panels() {
     selection = 0;
   }
   noStroke()
-  fill(200, 100, 0, 150);
+  fill(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
   if (masterpos[1] < windowWidth/2+100) {
     masterpos[2] = (map(masterpos[1], windowWidth/2-200, windowWidth/2+100, 0, 1)*100).toFixed(0);
   } else {
@@ -1020,25 +1096,24 @@ function panels() {
   }
   // botLockTop
   rectMode(CENTER, CENTER);
-  if (mouseX >= windowWidth-35-10 && mouseX <= windowWidth-35+10 &&
+  if (mouseX >= windowWidth/2+270-10 && mouseX <= windowWidth/2+270+10 &&
   mouseY >= topy-30-10 && mouseY <= topy-30+10) {
-    fill(200, 100, 0);
+    fill(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
   } else {
-    fill(100, 50, 0);
+    fill(colours[colsel].red2, colours[colsel].green2, colours[colsel].blue2, 150);
   }
-  rect(windowWidth-35, topy-30, 16, 16, 3, 3, 3, 3);
+  rect(windowWidth/2+270, topy-30, 16, 16, 3, 3, 3, 3);
   strokeWeight(2);
-  stroke(0)
+  stroke(colours[colsel].maincol1, colours[colsel].maincol2, colours[colsel].maincol3)
   if (botLockTop) {
-    arc(windowWidth-35, topy-32, 6, 6, PI, TWO_PI);
+    arc(windowWidth/2+270, topy-32, 6, 6, PI, TWO_PI);
   } else {
-    arc(windowWidth-35, topy-32, 6, 6, PI, TWO_PI-QUARTER_PI);
+    arc(windowWidth/2+270, topy-32, 6, 6, PI, TWO_PI-QUARTER_PI);
   }
   noFill()
-  rect(windowWidth-35, topy-28, 8, 6, 0, 0, 1, 1);
+  rect(windowWidth/2+270, topy-28, 8, 6, 0, 0, 1, 1);
   strokeWeight(1);
   rectMode(CORNER);
-
 
 }
 
