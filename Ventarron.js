@@ -557,10 +557,20 @@ function draw() {
       rectMode(CENTER);
     }
     noStroke();
-    fill(colours[colsel].grey1, 150-loadshade);
-    fill(colours[colsel].grey2, 255-loadshade);
     if (screench == true && loadcomp == track.length) {
-      text(infoData[lenguage].spacebarBarPress, windowWidth/2, windowHeight/2+200);
+      fill(colours[colsel].grey1, 150-loadshade);
+      stroke(colours[colsel].grey2, 255-loadshade);
+      if (lenguage == 0) {
+        rect(windowWidth/2+48, windowHeight/2+3, 93, 30, 3, 3, 3, 3);
+        rect(windowWidth/2-60, windowHeight/2+30+3, 30, 30, 3, 3, 3, 3);
+      } else {
+        rect(windowWidth/2+55, windowHeight/2+3, 175, 30, 3, 3, 3, 3);
+        rect(windowWidth/2-54, windowHeight/2+30+3, 30, 30, 3, 3, 3, 3);
+      }
+      fill(colours[colsel].grey2, 255-loadshade);
+      noStroke();
+      text(infoData[lenguage].spacebarBarPress, windowWidth/2, windowHeight/2);
+      text(infoData[lenguage].infobuttominfo, windowWidth/2, windowHeight/2+30);
     }
   }
 }
