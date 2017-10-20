@@ -1004,6 +1004,20 @@ function panels() {
     }
   }
 
+  // Left panel information
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 200);
+  noStroke();
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
+  // rectMode(CORNER);
+  textAlign(CENTER, CENTER);
+  textSize(17);
+  text(infoData[lenguage].song+infoData[lenguage].songName, lside-100, windowHeight/2-30);
+  text(infoData[lenguage].artist+infoData[lenguage].artistName, lside-100, windowHeight/2);
+  text(infoData[lenguage].album+infoData[lenguage].albumName, lside-100, windowHeight/2+30);
+
+  stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
+  textAlign(CENTER, CENTER);
+
   // panel slide: bottom
   if (botLockBottom == false) {
     if ((mouseY > bottom || info == true) && (mouseIsPressed == false || bottom <= windowHeight-50)) {

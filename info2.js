@@ -59,7 +59,14 @@ var infoData = [
     "info": "The 'I' key will toogle the 'info' window on and off. You can press the key on the keyboard or the the button on the top left corner.",
     "fullscreenKey": "The 'F' key will toogle the screen mode between windowed or fullscreen",
     "lenguage": "This button will toogle the lenguage between ENGLISH and SPANISH. Este Boton cambiará el idioma entre ESPAÑOL e INGLES.",
-    "reset": "The 'R' key will set the mix in the original state."
+    "reset": "The 'R' key will set the mix in the original state.",
+    "contact": "Contact: gastonchatelet@gmail.com",
+    "song": "Song: ",
+    "songName": "Ventarrón",
+    "artist": "Artist: ",
+    "artistName": "Gaston Chatelet",
+    "album": "Album: ",
+    "albumName": "Viento Soy",
   },
   {
     "screench": "Seleccione el modo de pantalla",
@@ -82,7 +89,14 @@ var infoData = [
     "info": "La tecla 'I' abrirá o cerrará la ventana de información. Podes presionar la tecla 'i' en el teclado o el botón que se encuentra en la esquina superior izquierda con el mouse.",
     "fullscreenKey": "La tecla 'F' cambiara el modo de pantalla entre 'pantalla completa' o 'ventana'",
     "lenguage": "Este botón cambiará el idioma entre ESPAÑOL e INGLES. This button will toogle the lenguage between ENGLISH and SPANISH.",
-    "reset": "La tecla 'R' seteará la mezcla en su estado original."
+    "reset": "La tecla 'R' seteará la mezcla en su estado original.",
+    "contact": "Contacto: gastonchatelet@gmail.com",
+    "song": "Canción: ",
+    "songName": "Ventarrón",
+    "artist": "Artista: ",
+    "artistName": "Gaston Chatelet",
+    "album": "Album: ",
+    "albumName": "Viento Soy"
   }
 ]
 
