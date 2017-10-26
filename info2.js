@@ -65,6 +65,8 @@ var infoData = [
     "songName": "Ventarrón",
     "artist": "Artist: ",
     "artistName": "Gaston Chatelet",
+    "producer": "Producer: ",
+    "producerName": "Cesar Altamirano",
     "album": "Album: ",
     "albumName": "Viento Soy",
   },
@@ -95,6 +97,8 @@ var infoData = [
     "songName": "Ventarrón",
     "artist": "Artista: ",
     "artistName": "Gaston Chatelet",
+    "producer": "Productor: ",
+    "producerName": "Cesar Altamirano",
     "album": "Album: ",
     "albumName": "Viento Soy"
   }
