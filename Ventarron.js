@@ -1007,14 +1007,19 @@ function panels() {
   // Left panel information
   stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 200);
   noStroke();
-  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
+  fill(colours[colsel].inforstr-50, colours[colsel].infogstr-50, colours[colsel].infobstr-50);
   // rectMode(CORNER);
   textAlign(LEFT);
+  textSize(20);
+  text(infoData[lenguage].song, lside-190, windowHeight/2-45);
+  text(infoData[lenguage].artist, lside-190, windowHeight/2);
+  text(infoData[lenguage].album, lside-190, windowHeight/2+70);
+  fill(colours[colsel].inforstr, colours[colsel].infogstr, colours[colsel].infobstr);
   textSize(14);
-  text(infoData[lenguage].song+infoData[lenguage].songName, lside-190, windowHeight/2-30);
-  text(infoData[lenguage].artist+infoData[lenguage].artistName, lside-190, windowHeight/2);
-  text(infoData[lenguage].producer+infoData[lenguage].producerName, lside-190, windowHeight/2+30);
-  text(infoData[lenguage].album+infoData[lenguage].albumName, lside-190, windowHeight/2+60);
+  text(infoData[lenguage].songName, lside-190, windowHeight/2-30);
+  text(infoData[lenguage].artistName[0], lside-190, windowHeight/2+15);
+  text(infoData[lenguage].artistName[1], lside-190, windowHeight/2+30);
+  text(infoData[lenguage].albumName, lside-190, windowHeight/2+85);
 
   stroke(colours[colsel].red1, colours[colsel].green1, colours[colsel].blue1, 150);
   textAlign(CENTER, CENTER);
